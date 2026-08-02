@@ -1,0 +1,447 @@
+# Warmly Knowledge Base
+
+
+## Getting Set Up in Warmly
+
+- [Signing In To Warmly](https://help.warmly.ai/articles/4243488511-signing-into-warmly)
+- [Setting Up Your Profile in Warmly](https://help.warmly.ai/articles/2020365274-setting-up-your-profile-in-warmly)
+- [Manually Uploading Your Profile Picture](https://help.warmly.ai/articles/8214694508-manually-uploading-your-profile-picture)
+- [Inviting Teammates to Warmly](https://help.warmly.ai/articles/6187175574-inviting-teammates-to-warmly)
+- [Warmly's Free Version: Getting Set Up](https://help.warmly.ai/articles/9207257828-warmly-s-free-version-getting-set-up)
+- [Rep Training for Warmly](https://help.warmly.ai/articles/4731289584-rep-training-for-warmly)
+- [Tips for Live Chatting with Prospects](https://help.warmly.ai/articles/7431841229-tips-for-live-chatting-with-prospects)
+- [Warmly Pre-Onboarding](https://help.warmly.ai/articles/6018583338-warmly-pre-onboarding)
+- [Warmly's Email UTM for Individual-Level Identification](https://help.warmly.ai/articles/1298354708-)
+- [Understanding How Warmly Writes Data to Your CRM](https://help.warmly.ai/articles/7669669149-understanding-how-warmly-writes-data-to-your-crm)
+- [Preventing Duplicate Data in Your CRM with Warmly](https://help.warmly.ai/articles/2165472450-preventing-duplicate-data-in-your-crm-with-warmly)
+
+### FAQs
+
+- [I didn't receive an invite email, how do I access Warmly?](https://help.warmly.ai/articles/3139407496-i-didn-t-receive-an-invite-email-how-do-i-access-warmly)
+- [How do I re-enable my Warmly organization?](https://help.warmly.ai/articles/2187463011-how-do-i-re-enable-my-warmly-organization)
+
+### Troubleshooting
+
+- [I can't login to Warmly using my Microsoft email](https://help.warmly.ai/articles/6006935387-trouble-logging-into-warmly)
+- [Troubleshooting With Warmly (Help!)](https://help.warmly.ai/articles/5839108239-troubleshooting-with-warmly-help)
+- [Unable to Sign In to Warmly](https://help.warmly.ai/articles/6355706778-unable-to-sign-in-to-warmly)
+
+## Warmly Script Tag
+
+- [The Warmly Script & Performance](https://help.warmly.ai/articles/8757953143-the-warmly-script-performance)
+- [Adding Warmly’s Code Snippet to Your Website](https://help.warmly.ai/articles/1284176056-adding-warmly-s-code-snippet-to-your-website)
+- [Warmly Script Installation: Technical Documentation](https://help.warmly.ai/articles/2174475366-warmly-script-installation-technical-documentation)
+
+## Warmly Integrations
+
+- [Pushing Data from Warmly to Instantly ](https://help.warmly.ai/articles/4979868837-pushing-data-from-warmly-to-instantly)
+- [Send Warmly Intent Signals to Google Sheets via Webhook](https://help.warmly.ai/articles/1250540603-send-warmly-intent-signals-to-google-sheets-via-webhook)
+
+### Slack Integration
+
+- [Recommended Slack Channels](https://help.warmly.ai/articles/9495652240-recommended-slack-channels)
+- [Migrating from Slack V1 to V2](https://help.warmly.ai/articles/5467912204-for-existing-customers-migrating-from-slack-v1-to-v2)
+- [Warmly Implementation Documentation: Slack](https://help.warmly.ai/articles/9814293126-warmly-implementation-documentation-slack)
+- [Testing your Slack Alert](https://help.warmly.ai/articles/3751547655-testing-your-slack-alert)
+- [Set up a Slack Alert for Chat Notifications](https://help.warmly.ai/articles/2839359760-set-up-a-slack-alert-for-chat-notifications)
+
+#### FAQs
+
+- [Why is my new slack channel not appearing in Warmly?](https://help.warmly.ai/articles/2889485387-why-is-my-new-slack-channel-not-appearing-in-warmly)
+- [How can I avoid Slack notifications for every repeat visit?](https://help.warmly.ai/articles/2094011511-how-can-i-avoid-slack-notifications-for-every-repeat-visit)
+- [Why doesn't the Slack notification show every page a visitor viewed?](https://help.warmly.ai/articles/9302031570-why-doesn-t-the-slack-notification-show-every-page-a-visitor-viewed)
+
+### Hubspot
+
+- [Warmly Integration Documentation: HubSpot](https://help.warmly.ai/articles/3850832231-warmly-s-hubspot-integration)
+- [ Mapping HubSpot or Salesforce IDs in Warmly: Understanding Internal vs User-Friendly Field Values](https://help.warmly.ai/articles/9767102774-mapping-hubspot-or-salesforce-ids-in-warmly-understanding-internal-vs-user-friendly-field-values)
+
+#### FAQ
+
+- [How can I tell if a record was created by Warmly?](https://help.warmly.ai/articles/4423003036-how-can-i-tell-if-a-record-was-created-by-warmly)
+- [How can I tell if a record was updated by Warmly?](https://help.warmly.ai/articles/3672942573-how-can-i-tell-if-a-record-was-updated-by-warmly)
+- [How many total possible API calls per day would Warmly make?](https://help.warmly.ai/articles/3796141143-how-many-total-possible-api-calls-per-day-would-warmly-make)
+- [How does Warmly assign record ownership in HubSpot?](https://help.warmly.ai/articles/3923650614-how-does-warmly-assign-record-ownership-in-hubspot)
+
+### Salesforce
+
+- [Warmly Integration Documentation: Salesforce](https://help.warmly.ai/articles/2652560958-salesforce_integration)
+- [Setting up Salesforce Permissions / Sandbox Setup](https://help.warmly.ai/articles/7124454555-integrating-sfdc-without-full-permissions)
+- [Warmly Managed Package Installation & Report Update Guide](https://help.warmly.ai/articles/5697119005-warmly-managed-package-installation-report-update-guide)
+
+#### FAQ
+
+- [How can I tell if a record was created by Warmly?](https://help.warmly.ai/articles/8425667035-how-will-i-know-that-a-record-has-been-created-by-warmly)
+- [How many total possible API calls per day would Warmly make?](https://help.warmly.ai/articles/8924281807-how-many-total-possible-api-calls-per-day-would-warmly-make)
+- [How does Warmly assign record ownership in Salesforce?](https://help.warmly.ai/articles/5105302808-how-does-warmly-assign-record-ownership-in-salesforce)
+- [How can I tell if a record was updated by Warmly?](https://help.warmly.ai/articles/9844964930-how-can-i-tell-if-a-record-was-updated-by-warmly)
+
+### Outreach
+
+- [Warmly Integration Documentation: Outreach](https://help.warmly.ai/articles/5450305516-warmly-integration-documentation-outreach)
+- [Sync Warmly Visitor Activity from HubSpot to Outreach for your SDRs](https://help.warmly.ai/articles/1346335545-sync-warmly-intent-signals-from-hubspot-to-outreach)
+- [Sync Warmly Visitor Activity from Salesforce to Outreach for your SDRs](https://help.warmly.ai/articles/3473167032-sync-warmly-visitor-activity-from-salesforce-to-outreach-for-your-sdrs)
+
+### Apollo
+
+- [Warmly Integration Documentation: Apollo (for Sequencing)](https://help.warmly.ai/articles/9815412278-warmly-integration-documentation-apollo-for-sequencing)
+- [Warmly Integration Documentation: Apollo (for Persona Enrichment)](https://help.warmly.ai/articles/9266284176-warmly-integration-documentation-apollo-for-persona-enrichment)
+- [Sync Warmly Visitor Activity from HubSpot to Apollo for your SDRs](https://help.warmly.ai/articles/9348507414-sync-warmly-data-from-hubspot-to-apollo)
+
+### Salesloft
+
+- [Warmly Integration Documentation: Salesloft](https://help.warmly.ai/articles/3613778639-warmly-integration-documentation-salesloft)
+- [Sync Warmly Visitor Activity from HubSpot to Salesloft for your SDRs](https://help.warmly.ai/articles/7875702807-sync-warmly-data-from-hubspot-to-salesloft)
+
+### Salesflow
+
+- [Salesflow Messaging Examples](https://help.warmly.ai/articles/3983371430-salesflow-messaging-examples)
+- [Salesflow Campaign Setup](https://help.warmly.ai/articles/3752390532-salesflow-campaign-setup)
+- [Salesflow FAQ/Best Practices](https://help.warmly.ai/articles/7597970490-salesflow-faq-best-practices)
+- [Salesflow Permissions & Manager Seats](https://help.warmly.ai/articles/4070804642-salesflow-permissions-manager-seats)
+- [Creating and Connecting Your Salesflow Account](https://help.warmly.ai/articles/4078974172-creating-your-salesflow-account)
+
+### 6sense
+
+- [6sense Integration: API Key](https://help.warmly.ai/articles/3653773416-6sense-integration-api-key)
+
+### RB2B
+
+- [How to Integrate RB2B with Warmly](https://help.warmly.ai/articles/3278731255-how-to-integrate-rb2b-with-warmly)
+
+### Clay
+
+- [Setup Guide: Clay](https://help.warmly.ai/articles/1885800474-setup-guide-clay)
+
+### 11x
+
+- [Setup Guide: 11x](https://help.warmly.ai/articles/1261457482-setup-guide-11x)
+
+### Webhooks
+
+- [Warmly Webhooks](https://help.warmly.ai/articles/7839413626-setting-up-webhooks)
+
+### Microsoft Teams
+
+- [How to Send Microsoft Teams Contact Notifications Using Webhooks and Power Automate](https://help.warmly.ai/articles/1526647368-how-to-send-microsoft-teams-notifications-from-orchestrator-using-webhooks-and-power-automate)
+- [How to Send Microsoft Teams Company Notifications Using Webhooks and Power Automate](https://help.warmly.ai/articles/7833342569-how-to-send-microsoft-teams-company-notifications-from-orchestrator-using-webhooks-and-power-automate)
+- [Warmly Implementation Documentation: Microsoft Teams Alerts](https://help.warmly.ai/articles/1481974657-microsoft-teams-integration-real-time-visitor-notifications)
+
+### Middleware Integrations
+
+- [Warmly & Zapier Integration](https://help.warmly.ai/articles/6752668157-warmly-zapier-integration)
+- [Warmly & Make Integration](https://help.warmly.ai/articles/6113850353-warmly-make-integration)
+
+### Bombora Integration
+
+- [Recommendations for 2nd & 3rd Party Intent Topic & Keyword Selection](https://help.warmly.ai/articles/5618443739-intent-topic-keyword-selection-for-pipeline-generation-with-warmly)
+- [Setting Up Bombora Intent Topics in Warmly](https://help.warmly.ai/articles/4770328265-setting-up-bombora-intent-topics-in-warmly)
+- [Understanding How Bombora Signals Are Used Throughout Warmly](https://help.warmly.ai/articles/2097791831-understanding-how-bombora-signals-are-used-throughout-warmly)
+
+### Vector
+
+- [How to Integrate Vector with Warmly](https://help.warmly.ai/articles/7188477958-how-to-integrate-vector-with-warmly)
+
+### ActiveCampaign
+
+- [Setup Guide: ActiveCampaign Enrichment Integration](https://help.warmly.ai/articles/4357129045-setup-guide-activecampaign-integration)
+
+### LeadIQ
+
+- [Warmly Implementation Documentation: LeadIQ](https://help.warmly.ai/articles/2229749746-warmly-technical-documentation-leadiq)
+
+### LeanData
+
+- [Warmly Integration Documentation: LeanData](https://help.warmly.ai/articles/6356815099-setting-up-your-leandata-bookit-integration-with-warmly)
+
+### Sendoso
+
+- [Warmly Implementation Documentation: Sendoso](https://help.warmly.ai/articles/7923414067-warmly-implementation-documentation-sendoso)
+
+### Meta Ads
+
+- [Warmly Implementation Documentation: Meta Ads](https://help.warmly.ai/articles/4165465937-meta-ads-integration)
+
+### LinkedIn Ads
+
+- [Warmly Implementation Documentation: LinkedIn Ads](https://help.warmly.ai/articles/4523809763-linkedin-ads-integration)
+
+### Marketo
+
+- [Warmly Integration Documentation: Marketo](https://help.warmly.ai/articles/8612697751-warmly-integration-documentation-marketo)
+
+### Chili Piper
+
+- [Using Chili Piper Booking Links in Warmly Chat & AI Inbound Autopilot Agent](https://help.warmly.ai/articles/2643494228-using-chili-piper-booking-links-in-warmly-chat-ai-inbound-autopilot-agent)
+
+## Warmly Segments & Personas
+
+
+### Buyer Personas
+
+- [NEW Buyer Persona](https://help.warmly.ai/articles/2736754086-new-buyer-persona)
+- [Understanding Buyer Persona Segment: Job Titles](https://help.warmly.ai/articles/2501638647-understanding-buyer-persona-segment-job-titles)
+
+### Segments 2.0
+
+- [Segments 2.0 - The Definitive Guide](https://help.warmly.ai/articles/6282766308-segments-2-0-the-definitive-guide)
+- [Segments 2.0 - Testing Your Segments](https://help.warmly.ai/articles/9125616320-)
+- [Segments 2.0 - Target Customer Profile](https://help.warmly.ai/articles/6008975551-)
+- [Segments 2.0 - CRM Company](https://help.warmly.ai/articles/8773950620-)
+- [Segments 2.0 - CRM Contact](https://help.warmly.ai/articles/5751818085-)
+- [Segments 2.0 - Signals: Page Visits](https://help.warmly.ai/articles/9623770638-segments-2-0-signals-page-visits)
+- [Segments 2.0 - Signals: Active Session Time](https://help.warmly.ai/articles/8868637707-segments-2-0-signals-active-session-time)
+- [Segments 2.0 - Signals: Form Fills](https://help.warmly.ai/articles/3877554247-segments-2-0-signals-form-fills)
+- [Segments 2.0 - Signals: UTM Tracking](https://help.warmly.ai/articles/8020606166-segments-2-0-signals-utm-tracking)
+- [Segments 2.0 - Signals: Chat Engagement](https://help.warmly.ai/articles/2891679902-segments-2-0-signals-chat-engagement)
+- [Segments 2.0 - Signals: Visitor Location](https://help.warmly.ai/articles/6711195885-segments-2-0-signals-visitor-location)
+- [Segments 2.0 - 3rd Party Signals: Bombora Research Intent](https://help.warmly.ai/articles/9168692091-segments-2-0-signals-bombora-research-intent)
+- [Segments 2.0 - Block List](https://help.warmly.ai/articles/5507218987-segments-2-0-block-list)
+- [Clearbit Industry Filters](https://help.warmly.ai/articles/4426606193-clearbit-industry-filters)
+- [Popular Warmly Segments: Setup and Use Cases](https://help.warmly.ai/articles/5694048981-commonly-used-warmly-segments-and-their-set-up)
+
+## Warmly Orchestrator
+
+- [Signal: Identified Company](https://help.warmly.ai/articles/6878309833-orchestrator-setup)
+- [Signal: Site Visitor](https://help.warmly.ai/articles/8805456898-orchestrator-site-visitor)
+- [Signal: Bombora Research Intent](https://help.warmly.ai/articles/1287633868-orchestrator-bombora-research-intent)
+- [Signal: New Hires](https://help.warmly.ai/articles/9002624799-orchestrator-new-hires)
+- [Signal: Contact Changed Jobs](https://help.warmly.ai/articles/4411985013-contact-changed-jobs)
+- [Signal: Chat Engaged](https://help.warmly.ai/articles/7432033732-signal-chat-engaged)
+- [Signal: TAM Audience Contacts](https://help.warmly.ai/articles/8689169348-orchestrator-tam-audience-contacts)
+- [Shared Assignment in Orchestrations](https://help.warmly.ai/articles/7157754942-shared-assignment-in-orchestrations)
+- [AI Emails: Generate Personalized Sequence](https://help.warmly.ai/articles/4076403436-ai-emails-generate-personalized-sequence)
+- [Sequencing Orchestrator Prospects via Hubspot](https://help.warmly.ai/articles/7534700074-sequencing-orchestrator-prospects-via-hubspot)
+- [Orchestrator Messaging Examples](https://help.warmly.ai/articles/5884430722-orchestrator-outbound-messaging-examples)
+
+## Warmly Chat
+
+- [Customizing Chat](https://help.warmly.ai/articles/2901681266-customizing-chat)
+- [Turning Chat On and Off](https://help.warmly.ai/articles/1588626607-turning-chat-on-and-off)
+- [Syncing Chats to Hubspot](https://help.warmly.ai/articles/9046846963-syncing-chats-to-hubspot)
+- [Syncing Chats to Salesforce](https://help.warmly.ai/articles/1357916851-syncing-chats-to-salesforce)
+- [Languages Supported by Warmly's AI Chat](https://help.warmly.ai/articles/1381857182-languages-supported-by-warmly-s-ai-chat)
+- [Warm Cues: AI-Powered Chat Insights](https://help.warmly.ai/articles/5420304525-warm-cues-ai-powered-chat-insights)
+- [How to Record a Custom Video for the AI Autopilot Inbound Agent's Video Avatar](https://help.warmly.ai/articles/9051261842-how-to-record-a-custom-video-for-the-ai-autopilot-inbound-agent-s-video-avatar)
+
+### Chat Setup
+
+- [Step-By-Step Guide to Setting up Chat (Basic Workflow)](https://help.warmly.ai/articles/4071672674-step-by-step-guide-to-setting-up-chat-basic-workflow)
+- [Creating and Integrating a Slack Channel for Chat Notifications](https://help.warmly.ai/articles/9248946430-creating-and-integrating-a-slack-channel-for-chat-notifications)
+- [What To Do If You Already Have A Chat Widget (Intercom, Hubspot, etc.)](https://help.warmly.ai/articles/1036999101-what-to-do-if-you-already-have-a-chat-widget-intercom-hubspot-etc)
+- [Adding Chat to Specific Webpages](https://help.warmly.ai/articles/2939022157-adding-chat-to-specific-webpages)
+- [How to Build and Configure Your First AI Chat Agent](https://help.warmly.ai/articles/2259388878-setting-up-ai-studio)
+- [AI Studio: Understanding how to use Test & Train](https://help.warmly.ai/articles/7456153260-ai-studio-understanding-how-to-use-test-train)
+- [Autopilot: Let your AI agent run the full inbound conversation](https://help.warmly.ai/articles/9575577707-autopilot-let-your-ai-agent-run-the-full-inbound-conversation)
+
+## Warmly Social Intent
+
+- [Social Intent: Setup](https://help.warmly.ai/articles/1776339467-setting-up-social-intent-listener)
+
+## Warmly Lead Routing
+
+- [How to set up Lead Routing](https://help.warmly.ai/articles/9565049292-lead-routing-setup)
+- [Applying Lead Routing Throughout Warmly](https://help.warmly.ai/articles/2629570150-applying-lead-routing-throughout-warmly)
+
+## Warmly Recommended Plays
+
+- [UTMs: Track Campaign Performance](https://help.warmly.ai/articles/6684251653-utms-track-campaign-performance)
+- [Warmly Key Plays: Chat + Orchestrator](https://help.warmly.ai/articles/8166109272-warmly-key-plays-chat-orchestrator)
+
+## Warmly Data
+
+- [Overview of Warmly's Data & Data Quality](https://help.warmly.ai/articles/5643444357-overview-of-warmly-s-data-data-quality)
+- [Data Quality Throughout Warmly](https://help.warmly.ai/articles/4272493020-data-quality-throughout-warmly)
+- [Our Commitment](https://help.warmly.ai/articles/7128743858-our-commitment)
+- [Warmly Compliance & Privacy](https://help.warmly.ai/articles/8800329629-warmly-compliance-privacy)
+- [Contact-Level Visitor Identification](https://help.warmly.ai/articles/3568026273-contact-level-identification)
+- [Company-Level Visitor Identification](https://help.warmly.ai/articles/2692662510-company-level-identification)
+- [Intent Signals](https://help.warmly.ai/articles/8281310485-intent-signals)
+- [Email Addresses](https://help.warmly.ai/articles/8430726456-email-addresses)
+- [Phone Numbers](https://help.warmly.ai/articles/4653552727-phone-numbers)
+- [Social Media Profiles](https://help.warmly.ai/articles/3251280144-social-media-profiles)
+- [Data Quality Slider: Setup](https://help.warmly.ai/articles/8415643533-warmly-data-quality-slider)
+- [Data Quality Slider: Choosing Your Quality](https://help.warmly.ai/articles/2693496132-data-quality-slider-choosing-your-quality)
+- [Data Quality Slider: Increasing Lead Confidence](https://help.warmly.ai/articles/7426545129-data-quality-slider-increasing-lead-confidence)
+- [Reliability, Security, and Compliance](https://help.warmly.ai/articles/1191355647-reliability-security-and-compliance)
+- [Warmly Identification Source](https://help.warmly.ai/articles/5435844582-warmly-identification-source)
+- [Warmly Privacy FAQ](https://help.warmly.ai/articles/3408847859-warmly-privacy-faq)
+- [Troubleshooting Warm Accounts/Visitors CSV Exports](https://help.warmly.ai/articles/4499677724-troubleshooting-warm-accounts-visitors-csv-exports)
+- [AI in Warmly FAQ](https://help.warmly.ai/articles/6933942349-ai-in-warmly-faq)
+
+## Coldly
+
+
+### Data
+
+- [How does Immagnify collect data?](https://help.warmly.ai/articles/4082624608-how-does-immagnify-collect-data)
+- [What sources do you use to get contact information?](https://help.warmly.ai/articles/7636498846-what-sources-do-you-use-to-get-contact-information)
+- [What’s the difference between you and other sales intelligence tools?](https://help.warmly.ai/articles/9131977853-what-s-the-difference-between-you-and-other-sales-intelligence-tools)
+- [How to use the Job Postings Feature](https://help.warmly.ai/articles/8479541745-how-to-use-the-job-postings-feature)
+- [How to use the Intent Signals feature](https://help.warmly.ai/articles/8632875581-how-to-use-the-intent-signals-feature)
+- [How to set your Deliverability Score (email accuracy score)](https://help.warmly.ai/articles/7472377823-how-to-set-your-deliverability-score-email-accuracy-score)
+
+### Getting Started
+
+- [How to search for a specific company](https://help.warmly.ai/articles/7138404366-how-to-search-for-a-specific-company)
+- [How to search for a specific contact](https://help.warmly.ai/articles/4676265623-how-to-search-for-a-specific-contact)
+- [How to find contacts in an advanced company search](https://help.warmly.ai/articles/3615321386-how-to-find-contacts-in-an-advanced-company-search)
+- [How to search for companies by Free Text](https://help.warmly.ai/articles/8090876004-how-to-search-for-companies-by-free-text)
+- [How to search for companies by technologies](https://help.warmly.ai/articles/6726845364-how-to-search-for-companies-by-technologies)
+- [Why does the same contact have more than one mobile number and one email address?](https://help.warmly.ai/articles/2081759604-why-does-the-same-contact-have-more-than-one-mobile-number-and-one-email-address)
+- [How to reveal contact info on Immagnify](https://help.warmly.ai/articles/7277735711-how-to-reveal-contact-info-on-immagnify)
+- [How to change the default home screen (People/Company)](https://help.warmly.ai/articles/2551635849-how-to-change-the-default-home-screen-people-company)
+- [How to expand the company’s information view](https://help.warmly.ai/articles/7618292728-how-to-expand-the-company-s-information-view)
+- [How to download an exported CSV list to my computer](https://help.warmly.ai/articles/3035369815-how-to-download-an-exported-csv-list-to-my-computer)
+- [How to expand the contact information view](https://help.warmly.ai/articles/9212516885-how-to-expand-the-contact-information-view)
+- [How to export a saved list to a CSV or a CRM](https://help.warmly.ai/articles/9184687902-how-to-export-a-saved-list-to-a-csv-or-a-crm)
+- [How to save companies to a list](https://help.warmly.ai/articles/4843624914-how-to-save-companies-to-a-list)
+- [How to search for companies by Free Text and technology](https://help.warmly.ai/articles/6928854939-how-to-search-for-companies-by-free-text-and-technology)
+- [How to set your Deliverability Score (email accuracy score)](https://help.warmly.ai/articles/2856598374-how-to-set-your-deliverability-score-email-accuracy-score)
+- [What does one credit include?](https://help.warmly.ai/articles/5358219675-what-does-one-credit-include)
+- [How to reveal contact’s information in one click (work email, mobile phone number, social link)](https://help.warmly.ai/articles/1396960016-how-to-reveal-contact-s-information-in-one-click-work-email-mobile-phone-number-social-link)
+- [How to save contacts to a list](https://help.warmly.ai/articles/4929671809-how-to-save-contacts-to-a-list)
+- [Getting Started with Coldly](https://help.warmly.ai/articles/5843641188-getting-started-with-coldly)
+
+### Account Settings
+
+- [How to reset your password](https://help.warmly.ai/articles/1999374093-how-to-reset-your-password)
+- [How to upgrade your plan](https://help.warmly.ai/articles/1600364110-how-to-upgrade-your-plan)
+- [How to disable a team member in your account](https://help.warmly.ai/articles/6883209020-how-to-disable-a-team-member-in-your-account)
+- [How to add team members to Coldly](https://help.warmly.ai/articles/2851612927-how-to-add-a-new-team-member-to-your-account)
+- [How to log out of your account](https://help.warmly.ai/articles/1486486011-how-to-log-out-of-your-account)
+
+### Company Search
+
+- [How to save a company search](https://help.warmly.ai/articles/9121772981-how-to-save-a-company-search)
+- [How to export companies directly from the search page](https://help.warmly.ai/articles/3282428601-how-to-export-companies-directly-from-the-search-page)
+- [How to search for companies by location](https://help.warmly.ai/articles/8885752316-how-to-search-for-companies-by-location)
+- [How to delete companies from a saved list](https://help.warmly.ai/articles/1174146695-how-to-delete-companies-from-a-saved-list)
+
+### People Search
+
+- [How to save a contact search](https://help.warmly.ai/articles/6744574920-how-to-save-a-contact-search)
+- [How to export contacts directly from the search page](https://help.warmly.ai/articles/6135585293-how-to-export-contacts-directly-from-the-search-page)
+- [How to find contacts by their current job tenure](https://help.warmly.ai/articles/6642885010-how-to-find-contacts-by-their-current-job-tenure)
+- [How to find contacts by their professional expertise](https://help.warmly.ai/articles/6545993092-how-to-find-contacts-by-their-professional-expertise)
+- [How to search for contacts by job titles](https://help.warmly.ai/articles/3976761462-how-to-search-for-contacts-by-job-titles)
+- [How to delete contacts from a saved list](https://help.warmly.ai/articles/7260011661-how-to-delete-contacts-from-a-saved-list)
+
+### Lists Management
+
+- [How to add a saved list to Favorites](https://help.warmly.ai/articles/1358861848-how-to-add-a-saved-list-to-favorites)
+- [How to edit a saved list’s name](https://help.warmly.ai/articles/6213134150-how-to-edit-a-saved-list-s-name)
+- [How to delete (archive) a saved list](https://help.warmly.ai/articles/9771504601-how-to-delete-archive-a-saved-list)
+- [How to share a saved list with your team member/s](https://help.warmly.ai/articles/8731110794-how-to-share-a-saved-list-with-your-team-member-s)
+- [How to get back to a saved list](https://help.warmly.ai/articles/5003831345-how-to-get-back-to-a-saved-list)
+
+### New Features
+
+- [How to enrich (import) a company list](https://help.warmly.ai/articles/5810103134-how-to-enrich-import-a-company-list)
+- [How to enrich (import) a contact list?](https://help.warmly.ai/articles/5512909819-how-to-enrich-import-a-contact-list)
+- [How to integrate your account with a CRM (HubSpot and Salesforce)](https://help.warmly.ai/articles/3302556541-how-to-integrate-your-account-with-a-crm-hubspot-and-salesforce)
+
+### Premium Features
+
+- [How to load a saved list of companies](https://help.warmly.ai/articles/1952764957-how-to-load-a-saved-list-of-companies)
+
+### Tips and Tricks
+
+- [How to search for contacts in a saved list of companies?](https://help.warmly.ai/articles/4967506098-how-to-search-for-contacts-in-a-saved-list-of-companies)
+- [What do the Advanced Search Capabilities include?](https://help.warmly.ai/articles/9671661829-what-do-the-advanced-search-capabilities-include)
+- [How to use the Persona feature](https://help.warmly.ai/articles/7696297921-how-to-use-the-persona-feature)
+- [How to exclude parameters from your search](https://help.warmly.ai/articles/3636657015-how-to-exclude-parameters-from-your-search)
+- [AND feature for an advanced search of companies or people](https://help.warmly.ai/articles/6850149883-and-feature-for-an-advanced-search-of-companies-or-people)
+- [How to clear all filters](https://help.warmly.ai/articles/5689387135-how-to-clear-all-filters)
+- [How to get back to a previous company search](https://help.warmly.ai/articles/2145395088-how-to-get-back-to-a-previous-company-search)
+- [How to get back to a previous contact search](https://help.warmly.ai/articles/9274062125-how-to-get-back-to-a-previous-contact-search)
+- [How to load a saved list of contacts](https://help.warmly.ai/articles/8827420609-how-to-load-a-saved-list-of-contacts)
+
+## Nametags
+
+
+### Nametags
+
+- [How do I get my Nametag on Microsoft Teams or Google Meet?](https://help.warmly.ai/articles/7492869691-how-do-i-get-my-nametag-on-microsoft-teams-or-google-meet)
+- [How do I turn my Nametag off and on?](https://help.warmly.ai/articles/7085452460-how-do-i-turn-my-warmly-nametag-off-and-on)
+- [How do I remove the Warmly link on my Nametag?](https://help.warmly.ai/articles/9214341429-how-do-i-remove-the-warmly-link-on-my-nametag)
+- [How can I customize my information on my Nametag?](https://help.warmly.ai/articles/5526320887-how-can-i-customize-my-information-on-my-nametag)
+- [How can I remove my Nametag after I uninstalled the App?](https://help.warmly.ai/articles/9916826617-how-can-i-remove-my-warmly-nametag-after-i-uninstalled-the-app)
+- [How do I show my real background in Zoom?](https://help.warmly.ai/articles/4642538448-how-do-i-show-my-real-background-in-zoom)
+- [I can't access Zoom Apps but still want a Nametag.](https://help.warmly.ai/articles/2141668292-i-can-t-access-zoom-apps-but-still-want-a-nametag)
+
+#### Troubleshooting Your Nametag
+
+- [What should my Nametag look like?](https://help.warmly.ai/articles/9326074147-what-should-my-nametag-look-like)
+- [My Nametag looks blurry, how do I fix it?](https://help.warmly.ai/articles/1300632041-my-nametag-looks-blurry-how-do-i-fix-it)
+- [Why is my face blurring into the background?](https://help.warmly.ai/articles/8828546546-why-is-my-face-blurring-into-the-background)
+- [Troubleshooting your Warmly Nametag](https://help.warmly.ai/articles/5993283090-troubleshooting-your-warmly-nametag)
+- [My Nametag information is flipped, how do I un-mirror it?](https://help.warmly.ai/articles/7272955416-my-nametag-information-is-flipped-how-do-i-un-mirror-it)
+- [External Cameras and Warmly](https://help.warmly.ai/articles/9223608842-external-cameras-and-warmly)
+
+#### Video-Off Nametags
+
+- [How to set your Video-off Profile Picture in Zoom](https://help.warmly.ai/articles/8228002962-how-to-set-your-video-off-profile-picture-in-zoom)
+
+### Setting up Nametags
+
+- [Nametags User Enablement Guide 101](https://help.warmly.ai/articles/2195323985-user-enablement-guide-101)
+- [Nametags User Enablement Guide 201](https://help.warmly.ai/articles/6473031225-user-enablement-guide-201)
+- [Speed up your approval from your Zoom Admin](https://help.warmly.ai/articles/4824955037-speed-up-your-approval-from-your-zoom-admin)
+
+#### Warmly & My Calendar
+
+- [How do I connect my calendar?](https://help.warmly.ai/articles/2936948653-how-do-i-connect-my-calendar)
+
+### What are Nametags?
+
+- [A Message from the CEO](https://help.warmly.ai/articles/8474840483-a-message-from-the-ceo)
+- [How are Nametags applicable to me?](https://help.warmly.ai/articles/7910288520-how-are-nametags-by-warmly-applicable-to-me)
+
+### Nametags Admin Help Center
+
+- [Nametag Bug Submission Guide](https://help.warmly.ai/articles/9715752909-warmly-bug-submission-guide)
+- [Zoom IT Admin: 101 Guide](https://help.warmly.ai/articles/2187931522-zoom-it-admin-101-guide)
+- [How do I gain access to my company's Nametag profile?](https://help.warmly.ai/articles/5934660369-how-do-i-gain-access-to-my-company-profile)
+
+#### Nametag Admin Resources
+
+- [Nametag Admin Portal](https://help.warmly.ai/articles/4076395774-admin-portal-for-warmly)
+- [IT Enablement Guide](https://help.warmly.ai/articles/5054163334-it-enablement-guide)
+
+### Nametags Trust & Privacy
+
+- [How did Nametags find information about me?](https://help.warmly.ai/articles/9999851132-when-you-first-create-your-warmly-profile-you-ll-be-prompted-to-grant-warmly-up-to-three-permissions-each-permission-is-needed-to-give-you-the-best-possible-experience-warmly-takes-your-secur)
+- [How do I opt-out of my info being on Nametags as a non-user?](https://help.warmly.ai/articles/3211655111-how-do-i-opt-out-of-my-info-being-on-warmly-as-a-non-user)
+- [Deleting your Nametag account](https://help.warmly.ai/articles/5184556341-deleting-your-warmly-account)
+- [Removing Nametags as a Zoom App](https://help.warmly.ai/articles/4302283850-removing-warmly-as-a-zoom-app)
+- [Nametag's Privacy Policy](https://help.warmly.ai/articles/4264904980-warmly-s-privacy-policy)
+- [Nametag's Terms of Service](https://help.warmly.ai/articles/9756194044-warmly-s-terms-of-service)
+- [Nametags Zoom Apps Privacy & Security Overview](https://help.warmly.ai/articles/9680848802-zoom-apps-privacy-security-overview)
+- [What data does Nametags see when Permissions are granted?](https://help.warmly.ai/articles/7896081756-what-data-does-warmly-see-when-permissions-are-granted)
+
+## Warm Offers
+
+- [How to Set Up Warm Offers](https://help.warmly.ai/articles/8347192751-how-to-set-up-warm-offers)
+
+## Warmly Developer Docs
+
+- [Warmly Widget Client-Side JS API](https://help.warmly.ai/articles/9531686049-warmly-widget-client-side-js-api)
+
+## MCP & API
+
+- [Warmly Technical Documentation: MCP Server](https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server)
+- [Warmly Technical Documentation: REST API](https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api)
+- [How will credits work for the MCP Server & API?](https://help.warmly.ai/articles/2565692815-how-will-credits-work-for-the-mcp-server-api)
+- [list_third_party_signals: The Full Signal Catalog](https://help.warmly.ai/articles/5717409632-list-third-party-signals-the-full-signal-catalog)
+
+
+- [Segments 2.0 - Signals: Data Quality](https://help.warmly.ai/articles/1422203158-segments-2-0-signals-data-quality)
+- [Warmly Office Hours](https://help.warmly.ai/articles/9833339532-warmly-classes)
+- [AI Chat: Example Prompt](https://help.warmly.ai/articles/9697139141-ai-chat-example-prompt)
+- [How to Create a Segment that Excludes Current Customers](https://help.warmly.ai/articles/4295399549-how-to-create-a-segment-that-excludes-current-customers)
+- [How to Send Warmly Orchestration Leads to Your Google Ad Campaign via Zapier](https://help.warmly.ai/articles/9463337128-how-to-send-warmly-orchestration-leads-to-your-google-ad-campaign-via-zapier)
+- [Warmly Office Hours](https://help.warmly.ai/articles/7623626006-warmly-office-hours)
+- [Setting Up AI Data Agent](https://help.warmly.ai/articles/2971746986-setting-up-ai-data-agent)
+- [Sending Warmly Leads to Google Sheets via Zapier](https://help.warmly.ai/articles/3694652935-sending-warmly-leads-to-google-sheets-via-zapier)
+- [TAM Agent FAQ Doc ](https://help.warmly.ai/articles/2356486449-tam-agent-faq-doc)

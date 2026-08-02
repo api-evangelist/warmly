@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+authentication:
+  rest: 'Bearer API key per organization (Authorization: Bearer)'
+  mcp: OAuth (browser login) per organization
+  reference: authentication/warmly-authentication.yml
+base_url: https://opps-api.getwarmly.com/api
+organization_scoping:
+  description: Every call is scoped to a single organization.
+  mechanisms:
+    - organizationId body field
+    - X-Warmly-Organization-Id header
+    - organization_id query parameter
+execution_model:
+  description: >-
+    Tools are invoked through a single execute endpoint that returns an
+    execution record; results and status are retrieved by execution id.
+  invoke: POST /agent-tools/execute
+  poll: GET /agent-tools/executions/:id
+  list: GET /agent-tools/executions
+  discover: GET /agent-tools/tools
+  async_writes: >-
+    Write tools (push contacts to HubSpot/Salesforce/sequences) run
+    asynchronously; execution status is reported via webhooks.
+pagination:
+  style: parameterized
+  observed_params: [take, timeWindow]
+  note: Read tools accept input parameters such as take (page size) and timeWindow.
+idempotency:
+  supported: false
+  note: No idempotency-key header or contract is documented by the provider.
+webhooks:
+  supported: true
+  events: execution status; intent-signal delivery
+  reference: asyncapi/warmly-webhooks.yml
+error_handling:
+  note: Errors are returned on the execution record; no RFC 9457 problem+json contract documented.
+rate_limiting:
+  model: credit-based
+  note: >-
+    Usage is metered in credits (250/month free; paid tiers 500-2,500). Credits
+    charge on identification (1 per company, 1 per contact, max 2 per unique
+    visitor per month) rather than by request rate.

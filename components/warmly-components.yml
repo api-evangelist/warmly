@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+type: Components
+source: https://help.warmly.ai/en/collections
+docs: https://help.warmly.ai/articles/9531686049-warmly-widget-client-side-js-api
+summary: Warmly ships client-side, embeddable surfaces installed via a website script tag, distinct from server-side SDKs. The Warmly script identifies visitors and renders the AI chat widget; a client-side JS API exposes browser-side controls.
+families:
+  - name: Warmly Script / Widget
+    description: A JavaScript snippet that powers visitor identification, the Warmly Chat widget, and popups.
+    loader: Warmly code snippet (script tag)
+    docs:
+      - https://help.warmly.ai/articles/1284176056-adding-warmly-s-code-snippet-to-your-website
+      - https://help.warmly.ai/articles/2174475366-warmly-script-installation-technical-documentation
+  - name: Warmly Widget Client-Side JS API
+    description: Browser-side JavaScript API for controlling the embedded Warmly widget.
+    docs:
+      - https://help.warmly.ai/articles/9531686049-warmly-widget-client-side-js-api
+  - name: Warmly Chat
+    description: Embeddable AI chat surface with customization and autopilot.
+    docs:
+      - https://help.warmly.ai/articles/2901681266-customizing-chat

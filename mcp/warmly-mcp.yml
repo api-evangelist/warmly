@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+docs: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
+server:
+  name: warmly
+  transport: http
+  url: https://opps-api.getwarmly.com/api/mcp
+  authentication:
+    type: oauth2
+    note: Browser-based OAuth login on first call; per-organization authorization.
+  multi_org:
+    query_param: organization_id
+    header: X-Warmly-Organization-Id
+install:
+  claude_desktop: Add a custom connector named "Warmly" pointing at the MCP URL.
+  cli: claude mcp add --transport http warmly https://opps-api.getwarmly.com/api/mcp
+tools:
+  - name: list_warm_visitors
+    description: Identified site visitors with company/contact profiles, pages visited, UTM data, and CRM integration status.
+    read_only: true
+  - name: list_warm_accounts
+    description: Identified visitors aggregated by company with session counts.
+    read_only: true
+  - name: list_third_party_signals
+    description: Third-party intent signal lookups (hiring, news, funding, social).
+    read_only: true
+  - name: get_credits_remaining
+    description: Current monthly credit balance for the organization.
+    read_only: true
+notes: >-
+  Async write tools push contacts to HubSpot, Salesforce, or sequences; webhooks
+  report execution status. Credits are charged on identification (1 per company,
+  1 per contact, max 2 per unique visitor per month). Free tier includes 250
+  credits/month.

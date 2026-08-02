@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+summary:
+  types: [http, oauth2]
+  http_scheme: bearer
+  oauth2_flows: [authorizationCode]
+  org_scoping: [X-Warmly-Organization-Id header, organization_id query param, organizationId body field]
+schemes:
+  - name: RestApiBearer
+    type: http
+    scheme: bearer
+    description: >-
+      REST API authenticates with a Bearer API key issued per organization,
+      sent as `Authorization: Bearer <api-key>` against the REST base URL
+      https://opps-api.getwarmly.com/api.
+    used_by: REST API (agent-tools endpoints)
+  - name: McpOAuth
+    type: oauth2
+    description: >-
+      The hosted MCP server at https://opps-api.getwarmly.com/api/mcp uses a
+      browser-based OAuth login on first call, authorizing the connecting agent
+      per Warmly organization.
+    flows:
+      - flow: authorizationCode
+    used_by: MCP server
+organization_scoping:
+  header: X-Warmly-Organization-Id
+  query_param: organization_id
+  body_field: organizationId
+  note: Multi-organization users must scope every call to a single organization.

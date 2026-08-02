@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://security.warmly.ai/
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: Hosted MCP server authenticates via OAuth (authorization code, browser login).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No application/problem+json error contract documented.
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 listed on the SafeBase-powered trust center (security.warmly.ai).
+  - id: gdpr
+    conforms: true
+    evidence: GDPR compliance listed on the trust center.
+  - id: ccpa
+    conforms: true
+    evidence: CCPA compliance listed on the trust center.
+  - id: eu-data-act
+    conforms: true
+    evidence: EU Data Act listed on the trust center.
+compliance_program:
+  url: https://security.warmly.ai/
+  provider: SafeBase
+  certifications: [SOC 2, GDPR, CCPA, EU Data Act]

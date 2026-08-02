@@ -1,8 +1,31 @@
 aid: warmly
 name: Warmly
-description: Warmly is a company surfaced as a portfolio company of felicis, techstars and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Warmly is a signal-based revenue orchestration and AI go-to-market platform
+  that de-anonymizes website visitors down to the individual person, unifies
+  first-, second-, and third-party intent signals in a unified Context Graph,
+  and runs two autonomous agents — an Inbound Agent that converts on-site
+  visitors through AI chat and an outbound TAM Agent that orchestrates
+  prospecting across email, LinkedIn, and ads. Warmly exposes a REST API and a
+  hosted, OAuth-authenticated MCP server (both live at opps-api.getwarmly.com)
+  that let agents list warm visitors and accounts, look up third-party intent
+  signals, check credit balances, and push identified contacts into HubSpot,
+  Salesforce, and sequences — with outbound webhooks reporting agent-tool
+  execution status and delivering intent signals to downstream automations.
 url: https://raw.githubusercontent.com/api-evangelist/warmly/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://logo.clearbit.com/warmly.ai
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,10 +35,36 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Sales
+- Marketing
+- Intent Data
+- Revenue Orchestration
+- Website Visitor Identification
+- AI Agents
+- Go To Market
+- MCP
+- Lead Generation
+- CRM
+apis:
+- name: Warmly REST API
+  description: >-
+    REST API for Warmly's agent-tools surface — discover available tools,
+    execute read tools (warm visitors, warm accounts, third-party intent
+    signals, credit balance) and async write tools (push contacts to
+    HubSpot/Salesforce/sequences), and retrieve execution records by id.
+    Authenticates with a per-organization Bearer API key.
+  humanURL: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+  baseURL: https://opps-api.getwarmly.com/api
+  properties:
+  - type: APIReference
+    url: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+  - type: Authentication
+    url: authentication/warmly-authentication.yml
+  - type: MCPServer
+    url: mcp/warmly-mcp.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,3 +73,52 @@ maintainers:
 common:
 - type: Website
   url: https://warmly.ai
+- type: DeveloperPortal
+  url: https://help.warmly.ai/en/collections/5275235549-mcp_api
+- type: Documentation
+  url: https://help.warmly.ai/
+- type: APIReference
+  url: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+- type: GettingStarted
+  url: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
+- type: Support
+  url: https://help.warmly.ai/
+- type: Blog
+  url: https://www.warmly.ai/p/resources/blog
+- type: Pricing
+  url: https://www.warmly.ai/p/pricing
+- type: SignUp
+  url: https://opps.getwarmly.com/login/?signup=free
+- type: TermsOfService
+  url: https://www.warmly.ai/p/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.warmly.ai/p/privacy-policy
+- type: Authentication
+  url: authentication/warmly-authentication.yml
+- type: MCPServer
+  url: mcp/warmly-mcp.yml
+- type: Webhooks
+  url: asyncapi/warmly-webhooks.yml
+- type: Conventions
+  url: conventions/warmly-conventions.yml
+- type: Components
+  url: components/warmly-components.yml
+- type: Conformance
+  url: conformance/warmly-conformance.yml
+- type: Compliance
+  url: https://security.warmly.ai/
+- type: TrustCenter
+  url: security/warmly-trust-center.yml
+- type: DomainSecurity
+  url: security/warmly-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/warmly-vulnerability-disclosure.yml
+- type: Security
+  url: https://security.warmly.ai/
+- type: LLMsTxt
+  url: llms/warmly-llms.txt
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 0
+  pass: local-v1

@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: searched
+type: Webhooks
+source: https://help.warmly.ai/articles/7839413626-setting-up-webhooks
+docs: https://help.warmly.ai/articles/7839413626-setting-up-webhooks
+summary: Warmly delivers outbound webhooks for intent signals and agent-tool execution status, powering downstream automations (Google Sheets, Microsoft Teams via Power Automate, Zapier, Make) and reporting status of async agent-tool executions from the REST API and MCP server.
+event_surface:
+  - name: intent-signal
+    description: Identified visitor / company intent signals pushed to a subscriber URL.
+    docs: https://help.warmly.ai/articles/1250540603-send-warmly-intent-signals-to-google-sheets-via-webhook
+  - name: execution-status
+    description: Status updates for asynchronous agent-tool executions (e.g. CRM write tools).
+    docs: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+middleware:
+  - zapier: https://help.warmly.ai/articles/6752668157-warmly-zapier-integration
+  - make: https://help.warmly.ai/articles/6113850353-warmly-make-integration
+note: Warmly publishes no AsyncAPI document; this file captures the documented webhook surface. Not fabricated as an AsyncAPI spec.

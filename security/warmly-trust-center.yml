@@ -1,0 +1,11 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://security.warmly.ai/
+url: https://security.warmly.ai/
+platform: SafeBase
+certifications: [SOC 2, GDPR, CCPA, EU Data Act]
+contact: security@warmly.ai
+evidence:
+  - source: https://security.warmly.ai/
+    keywords: [soc 2, gdpr, ccpa, eu data act, trust center]

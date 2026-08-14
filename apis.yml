@@ -35,7 +35,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 tags:
 - Company
 - Sales
@@ -65,6 +65,39 @@ apis:
     url: authentication/warmly-authentication.yml
   - type: MCPServer
     url: mcp/warmly-mcp.yml
+  - type: Conventions
+    url: conventions/warmly-conventions.yml
+  - type: ErrorCatalog
+    url: errors/warmly-problem-types.yml
+  - type: DataModel
+    url: data-model/warmly-data-model.yml
+  - type: RateLimits
+    url: rate-limits/warmly-rate-limits.yml
+- name: Warmly MCP Server
+  description: >-
+    Hosted, remote Model Context Protocol server exposing Warmly's agent-tools
+    registry to MCP-capable agents (Claude Desktop, Claude Code, Cursor, Zed).
+    Documented read tools cover identified website visitors, company-level warm
+    accounts, third-party intent signals and the organization credit balance;
+    async write tools push identified contacts into HubSpot, Salesforce and
+    sequences. Authenticates with OAuth 2.0 authorization code + PKCE against a
+    WorkOS AuthKit authorization server, discovered through RFC 9728
+    protected-resource metadata served at the API host.
+  humanURL: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
+  baseURL: https://opps-api.getwarmly.com/api/mcp
+  properties:
+  - type: MCPServer
+    url: mcp/warmly-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/warmly-tool-crosswalk.yml
+  - type: Authentication
+    url: authentication/warmly-authentication.yml
+  - type: OAuthScopes
+    url: scopes/warmly-scopes.yml
+  - type: WellKnown
+    url: well-known/warmly-well-known.yml
+  - type: GettingStarted
+    url: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -117,8 +150,34 @@ common:
   url: https://security.warmly.ai/
 - type: LLMsTxt
   url: llms/warmly-llms.txt
+- type: WellKnown
+  url: well-known/warmly-well-known.yml
+- type: OAuthScopes
+  url: scopes/warmly-scopes.yml
+- type: ToolCrosswalk
+  url: mcp/warmly-tool-crosswalk.yml
+- type: ErrorCatalog
+  url: errors/warmly-problem-types.yml
+- type: DataModel
+  url: data-model/warmly-data-model.yml
+- type: Packages
+  url: packages/warmly-packages.yml
+- type: RateLimits
+  url: rate-limits/warmly-rate-limits.yml
+- type: Plans
+  url: plans/warmly-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/warmly-lifecycle.yml
+- type: StatusPage
+  url: https://status.getwarmly.com/
+- type: ChangeLog
+  url: changelog/warmly-changelog.yml
+- type: Releases
+  url: https://www.warmly.ai/p/resources/launches
+- type: AgentSkill
+  url: skills/_index.yml
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 0
+  artifacts_added: 17
   pass: local-v1

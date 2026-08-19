@@ -1,26 +1,94 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://security.warmly.ai/
+source: https://opps-api.getwarmly.com/.well-known/oauth-protected-resource
+summary: >-
+  Warmly's standards posture is lopsided in an interesting way: the agent-facing
+  authorization path is genuinely standards-conformant — RFC 9728 protected-resource
+  metadata, an RFC 8414 / OIDC authorization server, PKCE S256, dynamic client
+  registration, and a correct WWW-Authenticate challenge — while the HTTP API layer
+  conforms to nothing. There is no OpenAPI, no RFC 9457 problem details, no RFC 9116
+  security.txt, no RFC 8594 sunset headers and no RateLimit header standard.
 standards:
-  - id: oauth2
-    conforms: true
-    evidence: Hosted MCP server authenticates via OAuth (authorization code, browser login).
-  - id: rfc9457-problem-details
-    conforms: false
-    evidence: No application/problem+json error contract documented.
-  - id: soc2
-    conforms: true
-    evidence: SOC 2 listed on the SafeBase-powered trust center (security.warmly.ai).
-  - id: gdpr
-    conforms: true
-    evidence: GDPR compliance listed on the trust center.
-  - id: ccpa
-    conforms: true
-    evidence: CCPA compliance listed on the trust center.
-  - id: eu-data-act
-    conforms: true
-    evidence: EU Data Act listed on the trust center.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: 'https://opps-api.getwarmly.com/.well-known/oauth-protected-resource returns 200 application/json declaring resource, authorization_servers, bearer_methods_supported and resource_documentation.'
+  method: probed
+- id: rfc6750-bearer-token-usage
+  conforms: true
+  evidence: 'Anonymous POST to /api/mcp returns 401 with WWW-Authenticate: Bearer ... error="invalid_token" and a resource_metadata parameter.'
+  method: probed
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: 'The declared authorization server (WorkOS AuthKit tenant vigorous-paper-03.authkit.app) serves /.well-known/oauth-authorization-server with 200.'
+  method: probed
+  note: Delegated to a third-party identity platform rather than served by Warmly itself.
+- id: openid-connect-discovery
+  conforms: true
+  evidence: '/.well-known/openid-configuration on the declared authorization server returns 200 with issuer, jwks_uri, userinfo_endpoint and RS256 id_token signing.'
+  method: probed
+  note: Delegated.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: ["S256"] on the authorization server metadata.'
+  method: probed
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: 'registration_endpoint published; client_id_metadata_document_supported: true.'
+  method: probed
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: 'device_authorization_endpoint published and urn:ietf:params:oauth:grant-type:device_code listed in grant_types_supported.'
+  method: probed
+- id: mcp
+  conforms: true
+  evidence: Hosted streamable-HTTP MCP server at https://opps-api.getwarmly.com/api/mcp, documented for Claude Desktop, Claude Code, Cursor and Zed.
+  method: searched
+- id: oauth2
+  conforms: true
+  evidence: Authorization-code flow with browser login for the MCP server; refresh and device-code grants supported.
+- id: openapi
+  conforms: false
+  evidence: 'No OpenAPI or Swagger document is served. /openapi.json, /openapi.yaml, /swagger.json, /api-docs, /docs and /redoc all return a Fastify JSON 404 on opps-api.getwarmly.com.'
+  method: probed
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a proprietary {message, error, statusCode} envelope; no application/problem+json is served. Tool failures are carried on a 202 execution record rather than an HTTP status.'
+  method: probed
+  reference: errors/warmly-problem-types.yml
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'No first-party security.txt on any Warmly host. The 200 at status.getwarmly.com/.well-known/security.txt belongs to Rootly, the status-page vendor.'
+  method: probed
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or sunset policy is published; headers could not be observed because every route is authenticated.
+- id: rfc9110-ratelimit-headers
+  conforms: false
+  evidence: Numeric limits and a 429 status are documented, but no RateLimit-* / X-RateLimit-* / Retry-After header is published.
+  reference: rate-limits/warmly-rate-limits.yml
+- id: asyncapi
+  conforms: false
+  evidence: Webhooks are documented but no AsyncAPI document is published.
+  reference: asyncapi/warmly-webhooks.yml
+- id: a2a
+  conforms: false
+  evidence: 'No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any Warmly host (404 on the API and docs hosts; the 200s on the marketing and app hosts are SPA catch-alls returning HTML).'
+  method: probed
+- id: soc2
+  conforms: true
+  evidence: SOC 2 listed on the SafeBase-powered trust center at security.warmly.ai.
+- id: gdpr
+  conforms: true
+  evidence: GDPR compliance listed on the trust center.
+- id: ccpa
+  conforms: true
+  evidence: CCPA compliance listed on the trust center.
+- id: eu-data-act
+  conforms: true
+  evidence: EU Data Act listed on the trust center.
 compliance_program:
   url: https://security.warmly.ai/
-  provider: SafeBase
+  provider: SafeBase by Drata
   certifications: [SOC 2, GDPR, CCPA, EU Data Act]
+  contact: security@warmly.ai
+  reference: security/warmly-trust-center.yml

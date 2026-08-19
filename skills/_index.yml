@@ -1,0 +1,30 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  mcp/warmly-mcp.yml, mcp/warmly-tool-crosswalk.yml,
+  conventions/warmly-conventions.yml, errors/warmly-problem-types.yml and
+  https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+grounding:
+  openapi: false
+  note: >-
+    Warmly publishes no OpenAPI, so these skills are grounded in the provider's
+    DOCUMENTED tool names (list_warm_visitors, list_warm_accounts,
+    list_third_party_signals, get_credits_remaining) and its four documented REST
+    routes, not in spec operationIds. Every tool name and every path below appears
+    verbatim in Warmly's own documentation. No operation has been invented.
+skills:
+- file: warmly-connect-and-discover-tools.md
+  name: Connect to Warmly and discover its tools
+  api: https://opps-api.getwarmly.com/api
+  operations: [GET /agent-tools/tools, POST /agent-tools/execute]
+  tools: [get_credits_remaining]
+- file: warmly-identify-website-visitors.md
+  name: Pull identified website visitors and accounts
+  api: https://opps-api.getwarmly.com/api
+  operations: [POST /agent-tools/execute, GET /agent-tools/executions/:id]
+  tools: [list_warm_visitors, list_warm_accounts]
+- file: warmly-third-party-intent-signals.md
+  name: Look up third-party intent signals without burning credits
+  api: https://opps-api.getwarmly.com/api
+  operations: [POST /agent-tools/execute, GET /agent-tools/executions/:id]
+  tools: [list_third_party_signals, get_credits_remaining]

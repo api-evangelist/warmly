@@ -1,32 +1,88 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
 docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+discovery: https://opps-api.getwarmly.com/.well-known/oauth-protected-resource
 summary:
   types: [http, oauth2]
   http_scheme: bearer
-  oauth2_flows: [authorizationCode]
+  oauth2_flows: [authorizationCode, refreshToken, deviceCode, clientCredentials]
+  pkce: [S256]
+  scopes: []
   org_scoping: [X-Warmly-Organization-Id header, organization_id query param, organizationId body field]
+  note: >-
+    Two different mechanisms for two surfaces: a long-lived per-organization Bearer
+    API key for REST, and delegated OAuth for MCP. Neither carries any scope, so a
+    credential grants everything the organization can do, including the async write
+    tools that mutate a connected CRM.
 schemes:
-  - name: RestApiBearer
-    type: http
-    scheme: bearer
-    description: >-
-      REST API authenticates with a Bearer API key issued per organization,
-      sent as `Authorization: Bearer <api-key>` against the REST base URL
-      https://opps-api.getwarmly.com/api.
-    used_by: REST API (agent-tools endpoints)
-  - name: McpOAuth
-    type: oauth2
-    description: >-
-      The hosted MCP server at https://opps-api.getwarmly.com/api/mcp uses a
-      browser-based OAuth login on first call, authorizing the connecting agent
-      per Warmly organization.
-    flows:
-      - flow: authorizationCode
-    used_by: MCP server
+- name: RestApiBearer
+  type: http
+  scheme: bearer
+  description: >-
+    The REST API authenticates with a per-organization API key sent as
+    `Authorization: Bearer $WARMLY_API_KEY` against https://opps-api.getwarmly.com/api.
+    Keys are issued from the Warmly admin UI.
+  used_by: REST API (agent-tools endpoints)
+  key_prefix: not published
+  rotation_policy: not published
+  expiry: not published
+  scopes: []
+  evidence:
+    url: https://opps-api.getwarmly.com/api/agent-tools/tools
+    http_status: 401
+    body: '{"error":"invalid_token","message":"Missing Bearer token"}'
+- name: McpOAuth
+  type: oauth2
+  description: >-
+    The hosted MCP server at https://opps-api.getwarmly.com/api/mcp is an OAuth 2.0
+    protected resource. It advertises its authorization server through RFC 9728
+    protected-resource metadata and returns a compliant WWW-Authenticate challenge, so
+    a standards-aware MCP client discovers the login route with no configuration.
+  used_by: MCP server
+  authorization_server: https://vigorous-paper-03.authkit.app
+  platform: WorkOS AuthKit
+  first_party: false
+  first_party_note: >-
+    A managed AuthKit tenant on a vendor domain. It is treated as Warmly's auth
+    surface because Warmly's own RFC 9728 document at opps-api.getwarmly.com names it
+    as the authorization server for the Warmly MCP resource.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://vigorous-paper-03.authkit.app/oauth2/authorize
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+    pkce: S256
+  - flow: refreshToken
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+    scope: offline_access
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://vigorous-paper-03.authkit.app/oauth2/device_authorization
+  - flow: clientCredentials
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+    note: Listed in openid-configuration only.
+  endpoints:
+    jwks_uri: https://vigorous-paper-03.authkit.app/oauth2/jwks
+    introspection_endpoint: https://vigorous-paper-03.authkit.app/oauth2/introspection
+    userinfo_endpoint: https://vigorous-paper-03.authkit.app/oauth2/userinfo
+    registration_endpoint: https://vigorous-paper-03.authkit.app/oauth2/register
+  dynamic_client_registration: true
+  scopes_supported: [openid, profile, email, offline_access]
+  resource_scopes_supported: []
+  id_token_signing_alg: RS256
+  evidence:
+    url: https://opps-api.getwarmly.com/api/mcp
+    http_status: 401
+    www_authenticate: 'Bearer resource_metadata="https://opps-api.getwarmly.com/.well-known/oauth-protected-resource", error="invalid_token"'
+  reference: scopes/warmly-scopes.yml
 organization_scoping:
   header: X-Warmly-Organization-Id
   query_param: organization_id
   body_field: organizationId
-  note: Multi-organization users must scope every call to a single organization.
+  note: >-
+    Multi-organization users must scope every call to a single organization. This is
+    tenancy selection, not authorization — it is carried out of band rather than in
+    the token's scope set.
+gaps:
+- No API scopes exist, so least-privilege access to a subset of tools is impossible.
+- No API-key prefix, rotation policy or expiry is published.
+- No mutual TLS, no signed requests, no IP allowlisting is documented.

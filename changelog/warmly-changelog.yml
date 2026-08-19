@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.warmly.ai/p/resources/launches
+summary: >-
+  Warmly's dated public release feed is its "Launches" page. It is a product launch
+  log rather than an API changelog: entries are dated and per-feature, but carry no
+  version numbers, no breaking-change flags and no per-endpoint detail. Two of the
+  six recent entries are the API/MCP surface itself.
+scheme:
+  style: dated-product-launches
+  versioned: false
+  current_version: null
+  breaking_change_flags: false
+  api_specific: false
+  note: >-
+    There is no API-specific changelog. An agent tracking contract drift on
+    opps-api.getwarmly.com has no dated source to watch.
+window: 2026-05-07 to 2026-05-29
+entry_count: 6
+entries:
+- date: '2026-05-29'
+  title: Warmly's Third-Party Signals via MCP and API
+  url: https://www.warmly.ai/p/resources/launches
+  api_relevant: true
+  type: addition
+  breaking: false
+  highlights: >-
+    Financial events, hiring trends, leadership changes, news, G2 reviews, SEC
+    filings and LinkedIn engagement exposed through the list_third_party_signals
+    tool on both the MCP server and the REST API.
+- date: '2026-05-19'
+  title: Warmly's MCP Server and API
+  url: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+  api_relevant: true
+  type: addition
+  breaking: false
+  highlights: >-
+    Launch of the hosted OAuth MCP server at
+    https://opps-api.getwarmly.com/api/mcp and the Bearer-authenticated REST
+    agent-tools API, with 250 free credits/month and paid tiers from $99.
+- date: '2026-05-12'
+  title: HeyReach Integration
+  api_relevant: false
+  type: addition
+  breaking: false
+  highlights: LinkedIn campaign triggers fired from Warmly signals, paired with AI email generation.
+- date: '2026-05-12'
+  title: Native Marketo Integration
+  api_relevant: false
+  type: addition
+  breaking: false
+  highlights: 300+ signals piped directly into Marketo smart campaigns.
+- date: '2026-05-12'
+  title: AI Email Generation
+  api_relevant: false
+  type: addition
+  breaking: false
+  highlights: Personalized follow-up emails generated from chat log, pages visited, enrichment and CRM stage.
+- date: '2026-05-07'
+  title: LinkedIn + Meta Ads Integration
+  api_relevant: false
+  type: addition
+  breaking: false
+  highlights: Routes ICP visitors and buying-committee contacts into paid ad audiences.
+evidence:
+- url: https://www.warmly.ai/p/resources/launches
+  http_status: 200
+- url: https://www.warmly.ai/launches
+  http_status: 404
+  detail: The bare /launches path 404s; the index lives at /p/resources/launches while individual posts live at /launches/<slug>.

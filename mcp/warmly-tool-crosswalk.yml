@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/warmly-mcp.yml + https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+summary: >-
+  Warmly's two surfaces are not two APIs — they are one tool registry behind two
+  front doors. The REST API does not expose per-capability endpoints; it exposes a
+  single generic dispatcher, POST /agent-tools/execute, which takes the MCP tool name
+  as a `toolName` string in the body. Every MCP tool therefore binds to the SAME REST
+  operation, and the real per-tool contract lives in the JSON Schema returned by
+  GET /agent-tools/tools, not in any path. This is the inverse of the usual pattern:
+  normally MCP tools are a thin projection of many REST operations; here REST is a
+  thin projection of the tool registry.
+surfaces:
+  openapi:
+    published: false
+    note: >-
+      Warmly publishes no OpenAPI document. /openapi.json, /openapi.yaml,
+      /swagger.json, /api-docs, /docs and /redoc all return a Fastify JSON 404 on
+      the API host root. The crosswalk below binds to documented REST paths rather
+      than to spec operationIds; ids are synthesized for reference and are marked as such.
+  rest:
+    base_url: https://opps-api.getwarmly.com/api
+    docs: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+    auth: Bearer API key
+    gated: true
+    dispatch_style: single-endpoint-with-toolName
+  mcp:
+    url: https://opps-api.getwarmly.com/api/mcp
+    auth: oauth
+    gated: true
+    note: tools/list returns 401 anonymously; tool names and parameters are transcribed from the docs.
+  graphql:
+    published: false
+operation_ids:
+  note: Synthesized labels for the four documented REST routes. They are NOT provider-published operationIds — no spec exists to grep.
+  executeTool: 'POST /agent-tools/execute'
+  getExecution: 'GET /agent-tools/executions/:id'
+  listExecutions: 'GET /agent-tools/executions'
+  listTools: 'GET /agent-tools/tools'
+crosswalk:
+- tool: list_warm_visitors
+  category: visitor-identification
+  rest: [executeTool, getExecution]
+  binding: rest
+  dispatch: 'POST /agent-tools/execute with toolName="list_warm_visitors"'
+  input_schema_source: 'GET /agent-tools/tools -> inputSchema (auth required)'
+  confidence: high
+  note: Synchronous; result returned inline on the execution record.
+- tool: list_warm_accounts
+  category: visitor-identification
+  rest: [executeTool, getExecution]
+  binding: rest
+  dispatch: 'POST /agent-tools/execute with toolName="list_warm_accounts"'
+  input_schema_source: 'GET /agent-tools/tools -> inputSchema (auth required)'
+  confidence: high
+- tool: list_third_party_signals
+  category: intent-signals
+  rest: [executeTool, getExecution]
+  binding: rest
+  dispatch: 'POST /agent-tools/execute with toolName="list_third_party_signals"'
+  input_schema_source: 'GET /agent-tools/tools -> inputSchema (auth required)'
+  confidence: high
+  note: Two modes (by_signal / by_company) are selected by an input field, not by a separate tool or path.
+- tool: get_credits_remaining
+  category: metering
+  rest: [executeTool, getExecution]
+  binding: rest
+  dispatch: 'POST /agent-tools/execute with toolName="get_credits_remaining"'
+  confidence: high
+  note: The only documented tool that does not charge credits.
+mcp_only: []
+rest_only:
+- operation: listTools
+  path: 'GET /agent-tools/tools'
+  reason: >-
+    Tool discovery. Its MCP equivalent is the protocol-level tools/list method rather
+    than a tool, so it has no entry in the tool registry. This is the authoritative
+    source of every tool inputSchema.
+- operation: listExecutions
+  path: 'GET /agent-tools/executions'
+  reason: >-
+    Execution history with filters (toolName, status, externalRef, date range). No MCP
+    tool exposes it, so an agent working over MCP alone cannot audit or reconcile its
+    own past executions — a real capability gap on the agent surface.
+- operation: getExecution
+  path: 'GET /agent-tools/executions/:id'
+  reason: >-
+    Polling for async completion. Bound above as the second half of every tool call,
+    but not itself a tool.
+undocumented:
+- surface: async write tools
+  detail: >-
+    Warmly states that async write tools push contacts to HubSpot, Salesforce and
+    sequences, and the execution model has an `awaiting_approval` state, but no tool
+    names or schemas are published for them. They are recorded as a known unknown and
+    deliberately NOT invented into crosswalk rows.
+coverage:
+  tools_documented: 4
+  tools_bound: 4
+  tools_unbound: 0
+  mcp_only: 0
+  rest_operations: 4
+  rest_operations_with_tool: 2
+  rest_only: 3
+  write_tools_documented_by_name: 0
+  note: >-
+    executeTool and getExecution are counted as the two operations reachable through
+    a tool; all four tools share them.

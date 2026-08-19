@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+docs: https://www.warmly.ai/p/pricing
+plan_count: 5
+currency: USD
+summary: >-
+  Warmly publishes two distinct commercial surfaces and they do not share a price
+  book. The API/MCP surface is self-serve, credit-metered and starts free at 250
+  credits/month with paid tiers at $99-$499/month. The platform surface sold on the
+  pricing page is annual/quarterly contract pricing at $10,000-$30,000/year with a
+  10,000 credit/month floor. The plans below are the API/MCP tiers, because those are
+  what an agent or developer can actually buy; the platform contracts are recorded
+  separately under platform_plans.
+unit:
+  name: credit
+  charged_on:
+  - 1 credit per newly identified company
+  - 1 credit per newly identified contact
+  cap: max 2 credits per unique visitor per calendar month
+  reset: monthly (dedupe window clears on calendar month change)
+  free: reads and re-identification of already-identified visitors; preview mode
+plans:
+- name: Free
+  price: 0
+  currency: USD
+  period: month
+  included_credits: 250
+  cost_per_credit: null
+  rate_limit: 60 requests/minute
+  overage: null
+  note: Included with every Warmly account; no card required.
+- name: Starter
+  price: 99
+  currency: USD
+  period: month
+  included_credits: 500
+  cost_per_credit: 0.198
+  rate_limit: 120 requests/minute
+  overage: null
+- name: Growth
+  price: 199
+  currency: USD
+  period: month
+  included_credits: 1000
+  cost_per_credit: 0.199
+  rate_limit: 120 requests/minute
+  overage: null
+- name: Pro
+  price: 499
+  currency: USD
+  period: month
+  included_credits: 2500
+  cost_per_credit: 0.200
+  rate_limit: 120 requests/minute
+  overage: null
+- name: Enterprise
+  price: null
+  currency: USD
+  period: custom
+  included_credits: 2500+
+  cost_per_credit: null
+  rate_limit: 120 requests/minute
+  contact_sales: true
+  note: Custom pricing; no published rate card.
+platform_plans:
+  source: https://www.warmly.ai/p/pricing
+  billing_periods: [annual, quarterly]
+  credit_floor: 10000 credits/month
+  note: >-
+    Platform (non-API) contracts. Annual prices shown; quarterly equivalents are
+    $4,875 / $6,500 / $9,750. A 30% saving is advertised for annual billing.
+  tiers:
+  - name: AI Web-Deanonymization
+    price: 10000
+    currency: USD
+    period: year
+    quarterly_price: 4875
+  - name: Inbound Chat
+    price: 20000
+    currency: USD
+    period: year
+    quarterly_price: 6500
+  - name: AI Inbound Autopilot
+    price: 30000
+    currency: USD
+    period: year
+    quarterly_price: 9750
+    most_popular: true
+  add_ons:
+  - {name: GTM Signals Package, price: 10000, currency: USD, period: year}
+  - {name: Warm Experiences, price: 10000, currency: USD, period: year}
+  - {name: AI 24/7 Video Chat Agent, price: null, contact_sales: true}
+evidence:
+- url: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+  http_status: 200
+  detail: Publishes the Free/Starter/Growth/Pro/Enterprise API credit tiers with prices.
+- url: https://www.warmly.ai/p/pricing
+  http_status: 200
+  detail: Publishes the annual/quarterly platform contract tiers and add-ons.

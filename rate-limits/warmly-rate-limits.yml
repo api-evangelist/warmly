@@ -1,0 +1,66 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+docs: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
+limit_count: 2
+summary: >-
+  Warmly publishes a per-minute request ceiling that differs by plan tier, and a
+  separate credit meter that is the real cost control. The request limit governs
+  call rate; credits govern how much identified data you may consume. Both the REST
+  API and the hosted MCP server sit behind the same limits.
+rate_limits:
+- id: free-tier-requests
+  scope: per-organization
+  applies_to: [REST API, MCP server]
+  window: 1m
+  limit: 60
+  unit: requests
+  tier: Free
+  burst: null
+- id: paid-tier-requests
+  scope: per-organization
+  applies_to: [REST API, MCP server]
+  window: 1m
+  limit: 120
+  unit: requests
+  tier: Starter/Growth/Pro/Enterprise
+  burst: null
+exhaustion:
+  status_code: 429
+  note: HTTP 429 is returned when the per-minute request limit is exceeded.
+response_headers:
+  published: false
+  observed: []
+  note: >-
+    Warmly documents the numeric limits and the 429 status but publishes no
+    rate-limit response headers (no X-RateLimit-*, RateLimit-* or Retry-After is
+    named in the docs), and the limits could not be observed live because every
+    endpoint requires a Bearer token. An agent therefore cannot read remaining
+    budget from a response and must back off on 429 alone. Recording this gap is
+    the finding, not an omission.
+quota:
+  model: credits
+  reset: monthly
+  charging:
+  - 1 credit per newly identified company
+  - 1 credit per newly identified contact
+  - maximum 2 credits per unique visitor per calendar month
+  free_operations:
+  - Re-queries of already-identified accounts and contacts
+  - Reads of previously accessed records
+  - Preview mode (preview: true) returns totals without charging credits
+  reference: plans/warmly-plans-pricing.yml
+payload_limits:
+  source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+  input_serialized_max: 256KB
+  input_max_keys: 1000
+  input_max_depth: 32
+  reasoning_max_chars: 50000
+  note: Applied to the `input` object on POST /agent-tools/execute.
+evidence:
+- url: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+  http_status: 200
+  detail: Publishes 60 req/min free, 120 req/min paid, HTTP 429 on exhaustion.
+- url: https://opps-api.getwarmly.com/api/agent-tools/tools
+  http_status: 401
+  detail: Live observation of rate-limit headers is not possible anonymously; endpoint returns invalid_token.

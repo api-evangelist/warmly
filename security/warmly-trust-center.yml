@@ -1,11 +1,32 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 probe: true
 source: https://security.warmly.ai/
 url: https://security.warmly.ai/
-platform: SafeBase
-certifications: [SOC 2, GDPR, CCPA, EU Data Act]
+platform: SafeBase by Drata
 contact: security@warmly.ai
+certifications:
+- SOC 2
+- GDPR
+- CCPA
+- EU Data Act
+controls:
+  product_security: [Audit Logging, Data Security, Integrations]
+  data_security: [Access Monitoring, Data Backups, Data Erasure]
+  access_control: [Access Log Management, Data Access, Logging]
+  infrastructure: [Anti-DDoS, Google Cloud Platform, Firebase]
+  endpoint_security: [DNS Filtering, Mobile Device Management, Threat Detection]
+  corporate_security: [Asset Management Practices, Employee Training, HR Security]
+documents:
+  gated: true
+  note: >-
+    Pentest reports, SOC 2 report, CAIQ self-assessment, BC/DR and SDLC policies
+    and architecture diagrams are listed on the trust center but require a
+    SafeBase access request; they were not retrieved.
+subprocessors:
+  published: false
+  note: No subprocessor list is exposed on the public trust center page.
 evidence:
-  - source: https://security.warmly.ai/
-    keywords: [soc 2, gdpr, ccpa, eu data act, trust center]
+- source: https://security.warmly.ai/
+  http_status: 200
+  keywords: [soc 2, gdpr, ccpa, eu data act, trust center, safebase]

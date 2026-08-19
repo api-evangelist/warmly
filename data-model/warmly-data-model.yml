@@ -1,0 +1,118 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+  and https://www.warmly.ai/launches/warmly-mcp-and-api-are-live (documented tool
+  inputs and returned fields). No OpenAPI exists to derive $ref links from.
+summary: >-
+  Warmly's public API exposes six entities. Two are control-plane (Tool, Execution),
+  three are data-plane (Visitor, Account, Signal) and one is metering (CreditBalance).
+  The identity spine is the company domain: an Account is keyed on it, a Visitor
+  belongs to one, and a Signal is attached to one. There is no published id-prefix
+  scheme and no stable identifier is documented for Visitor or Account, which means an
+  agent cannot reliably re-fetch a specific visitor — only re-query a filtered list.
+entities:
+- name: Tool
+  plane: control
+  description: A callable capability in Warmly's agent-tools registry.
+  fields:
+  - {name: name, type: string, note: The identifier passed as toolName.}
+  - {name: description, type: string}
+  - {name: isAsync, type: boolean}
+  - {name: inputSchema, type: object, note: JSON Schema for the tool's input.}
+  source: 'GET /agent-tools/tools'
+  identifier: name
+- name: Execution
+  plane: control
+  description: A record of one tool invocation, created by POST /agent-tools/execute.
+  fields:
+  - {name: id, type: string}
+  - {name: toolName, type: string}
+  - {name: organizationId, type: string}
+  - {name: input, type: object, limits: '256KB serialized, 1000 keys, 32 levels'}
+  - {name: reasoning, type: string, limits: 50000 chars}
+  - {name: externalRef, type: string, note: Caller-supplied reference for tracking. NOT documented as an idempotency key.}
+  - {name: status, type: enum, values: [pending, running, awaiting_approval, succeeded, failed, cancelled]}
+  - {name: output, type: object, note: Carries output.success.}
+  - {name: userFacingError, type: string}
+  - {name: timing, type: object}
+  source: 'POST /agent-tools/execute, GET /agent-tools/executions/:id'
+  identifier: id
+- name: Visitor
+  plane: data
+  description: An identified individual website visitor, de-anonymized from a session.
+  fields:
+  - {name: lastSeen, type: datetime}
+  - {name: totalSessions, type: integer}
+  - {name: sessionTime, type: number}
+  - {name: name, type: string}
+  - {name: title, type: string}
+  - {name: seniority, type: string}
+  - {name: linkedInHandle, type: string}
+  - {name: workEmail, type: string}
+  - {name: pagesVisited, type: array}
+  - {name: utm, type: object}
+  - {name: crmIntersection, type: object, note: HubSpot / Salesforce / Pipedrive presence.}
+  source: tool list_warm_visitors
+  identifier: undocumented
+  costs: 1 credit per newly identified contact
+- name: Account
+  plane: data
+  description: A company, being identified visitors aggregated at the organization level.
+  fields:
+  - {name: name, type: string}
+  - {name: domain, type: string}
+  - {name: industry, type: string}
+  - {name: employeeRange, type: string}
+  - {name: revenue, type: string}
+  - {name: sessionCount, type: integer}
+  - {name: distinctPages, type: integer}
+  source: tool list_warm_accounts
+  identifier: domain
+  costs: 1 credit per newly identified company
+- name: Signal
+  plane: data
+  description: A third-party intent event detected against a company.
+  fields:
+  - {name: signalCategory, type: string}
+  - {name: signalType, type: string}
+  - {name: signalSubtype, type: string}
+  - {name: companyDomain, type: string}
+  - {name: detectedAt, type: datetime}
+  categories_named: [financial events, hiring trends, leadership changes, news, G2 reviews, SEC filings, LinkedIn engagement]
+  source: tool list_third_party_signals
+  identifier: undocumented
+- name: CreditBalance
+  plane: metering
+  description: The organization's remaining monthly credit allowance.
+  fields:
+  - {name: remaining, type: integer}
+  - {name: organizationId, type: string}
+  source: tool get_credits_remaining
+  identifier: organizationId
+- name: Organization
+  plane: tenancy
+  description: The Warmly workspace every call is scoped to.
+  fields:
+  - {name: organizationId, type: string}
+  source: 'organizationId body field / X-Warmly-Organization-Id header / organization_id query param'
+  identifier: organizationId
+relationships:
+- {from: Execution, to: Tool, type: belongs_to, via: toolName}
+- {from: Execution, to: Organization, type: belongs_to, via: organizationId}
+- {from: Visitor, to: Account, type: belongs_to, via: company domain}
+- {from: Account, to: Visitor, type: has_many, via: company domain}
+- {from: Signal, to: Account, type: belongs_to, via: companyDomain}
+- {from: Account, to: Signal, type: has_many, via: companyDomain}
+- {from: CreditBalance, to: Organization, type: belongs_to, via: organizationId}
+- {from: Visitor, to: Organization, type: belongs_to, via: organizationId}
+external_references:
+  note: >-
+    Visitor and Account records carry CRM intersection state, making Warmly a
+    join between its own identity graph and a customer's CRM.
+  systems: [HubSpot, Salesforce, Pipedrive]
+gaps:
+- No stable public identifier is documented for Visitor or Signal.
+- No id-prefix convention is published.
+- Response schemas are only retrievable through the authenticated GET /agent-tools/tools inputSchema (inputs only); output schemas are not published at all.
+- Async write-tool entities (contact push targets, sequence enrollments) are not documented.

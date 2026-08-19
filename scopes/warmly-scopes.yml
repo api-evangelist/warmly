@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: probed
+source: https://opps-api.getwarmly.com/.well-known/oauth-protected-resource
+authorization_server: https://vigorous-paper-03.authkit.app
+discovery:
+- {url: 'https://opps-api.getwarmly.com/.well-known/oauth-protected-resource', spec: RFC 9728, status: 200}
+- {url: 'https://vigorous-paper-03.authkit.app/.well-known/oauth-authorization-server', spec: RFC 8414, status: 200}
+- {url: 'https://vigorous-paper-03.authkit.app/.well-known/openid-configuration', spec: OIDC Discovery 1.0, status: 200}
+summary: >-
+  Warmly's MCP server is an OAuth 2.0 protected resource, but it publishes NO
+  API-specific scopes. Its RFC 9728 metadata declares scopes_supported: [] — an
+  explicitly empty list — and the delegated WorkOS AuthKit authorization server
+  offers only the four generic OIDC scopes. There is therefore no way for an agent
+  or an administrator to request least-privilege access to a subset of Warmly's
+  tools: a token is all-or-nothing across every tool the organization can reach,
+  including the async write tools that push contacts into HubSpot and Salesforce.
+  Authorization is scoped by organization, not by capability.
+resource:
+  identifier: https://opps-api.getwarmly.com/api/mcp
+  bearer_methods_supported: [header]
+  scopes_supported: []
+  resource_documentation: https://docs.getwarmly.com/mcp
+  documentation_note: The declared documentation host does not resolve in DNS (NXDOMAIN); the live docs are on help.warmly.ai.
+schemes:
+- name: WarmlyMcpOAuth
+  type: oauth2
+  issuer: https://vigorous-paper-03.authkit.app
+  platform: WorkOS AuthKit
+  first_party: false
+  first_party_note: >-
+    A managed AuthKit tenant. Recorded here because Warmly's own RFC 9728 metadata
+    names it as the authorization server for the Warmly MCP resource.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://vigorous-paper-03.authkit.app/oauth2/authorize
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+    pkce: [S256]
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://vigorous-paper-03.authkit.app/oauth2/device_authorization
+  - flow: refreshToken
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+  - flow: clientCredentials
+    tokenUrl: https://vigorous-paper-03.authkit.app/oauth2/token
+    note: Advertised in openid-configuration only; absent from the RFC 8414 document.
+  endpoints:
+    jwks_uri: https://vigorous-paper-03.authkit.app/oauth2/jwks
+    introspection_endpoint: https://vigorous-paper-03.authkit.app/oauth2/introspection
+    userinfo_endpoint: https://vigorous-paper-03.authkit.app/oauth2/userinfo
+    registration_endpoint: https://vigorous-paper-03.authkit.app/oauth2/register
+  dynamic_client_registration: true
+  client_id_metadata_document_supported: true
+  token_endpoint_auth_methods_supported: [none, client_secret_post, client_secret_basic]
+  id_token_signing_alg_values_supported: [RS256]
+scopes:
+- scope: openid
+  description: OIDC subject identifier. Generic AuthKit scope, not Warmly-specific.
+  flows: [authorizationCode]
+  source: authorization-server
+- scope: profile
+  description: Basic profile claims. Generic AuthKit scope, not Warmly-specific.
+  flows: [authorizationCode]
+  source: authorization-server
+- scope: email
+  description: Email claim. Generic AuthKit scope, not Warmly-specific.
+  flows: [authorizationCode]
+  source: authorization-server
+- scope: offline_access
+  description: Issues a refresh token for long-running agent sessions.
+  flows: [authorizationCode, refreshToken]
+  source: authorization-server
+api_scopes:
+  count: 0
+  note: >-
+    Zero resource-specific scopes exist. No read-vs-write separation, no per-tool
+    scope, and no scope that distinguishes reading warm visitors from writing
+    contacts into a connected CRM.
+organization_scoping:
+  mechanism: Out-of-band, not via scope
+  query_param: organization_id
+  header: X-Warmly-Organization-Id
+  reference: authentication/warmly-authentication.yml

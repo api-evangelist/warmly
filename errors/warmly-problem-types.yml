@@ -1,0 +1,90 @@
+generated: '2026-08-13'
+method: searched
+source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
+docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+format: proprietary
+rfc9457: false
+summary: >-
+  Warmly has two distinct and unrelated error envelopes, and an agent must handle
+  both. Transport-level failures return a Fastify-style JSON body
+  ({message, error, statusCode} or {error, message}) with a real HTTP status.
+  Tool-level failures do NOT use an HTTP status at all — POST /agent-tools/execute
+  always returns HTTP 202, and success or failure is carried inside the execution
+  record on output.success plus a human-readable userFacingError. Treating a 202 as
+  success is the single most likely integration mistake against this API.
+envelopes:
+- id: transport
+  applies_to: All REST endpoints and the MCP endpoint
+  shape:
+    message: string
+    error: string
+    statusCode: integer
+  variant:
+    error: string
+    message: string
+  content_type: application/json
+  note: Observed live on anonymous probes; documented shape is not published by the provider.
+- id: tool-execution
+  applies_to: POST /agent-tools/execute, GET /agent-tools/executions/:id
+  shape:
+    status: string
+    output.success: boolean
+    userFacingError: string
+  http_status: 202
+  note: >-
+    Always HTTP 202 regardless of outcome. The terminal state is read from `status`
+    and the failure reason from `userFacingError`.
+execution_states:
+- {status: pending, terminal: false}
+- {status: running, terminal: false}
+- {status: awaiting_approval, terminal: false, note: Human-in-the-loop gate before a write tool proceeds.}
+- {status: succeeded, terminal: true}
+- {status: failed, terminal: true, note: Read userFacingError for the reason.}
+- {status: cancelled, terminal: true}
+problems:
+- status: 401
+  code: invalid_token
+  title: Missing Bearer token
+  body: '{"error":"invalid_token","message":"Missing Bearer token"}'
+  remediation: >-
+    Send the header `Authorization: Bearer <WARMLY_API_KEY>`. For the MCP endpoint,
+    complete the OAuth flow against the AuthKit authorization server instead.
+  method: probed
+  observed_at: https://opps-api.getwarmly.com/api/agent-tools/tools
+- status: 401
+  code: invalid_token
+  title: MCP OAuth challenge
+  www_authenticate: 'Bearer resource_metadata="https://opps-api.getwarmly.com/.well-known/oauth-protected-resource", error="invalid_token"'
+  remediation: Follow the RFC 9728 resource_metadata pointer to discover the authorization server, then obtain a token.
+  method: probed
+  observed_at: https://opps-api.getwarmly.com/api/mcp
+  note: A correct RFC 9728 challenge — this is the one part of Warmly's error surface that is fully standards-conformant.
+- status: 404
+  code: Not Found
+  title: Route not found
+  body: '{"message":"Route GET:/openapi.json not found","error":"Not Found","statusCode":404}'
+  remediation: Check the path against the four documented agent-tools routes.
+  method: probed
+  observed_at: https://opps-api.getwarmly.com/
+- status: 429
+  code: null
+  title: Rate limit exceeded
+  remediation: Back off and retry. 60 requests/minute on the free tier, 120 on paid. No Retry-After or RateLimit-* header is published.
+  method: searched
+  source: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+  reference: rate-limits/warmly-rate-limits.yml
+- status: 202
+  code: tool-failure
+  title: Tool execution failed
+  remediation: Inspect status == "failed" and userFacingError on the execution record; the HTTP status will still be 202.
+  method: searched
+input_validation:
+  note: >-
+    The `input` object on POST /agent-tools/execute is capped at 256 KB serialized,
+    1,000 keys and 32 levels of nesting; `reasoning` is capped at 50,000 characters.
+    The docs state the caps but do not publish the error returned when one is exceeded.
+gaps:
+- No error-code registry or reference page is published.
+- No application/problem+json (RFC 9457) contract.
+- The set of userFacingError values is not enumerated anywhere public.
+- Errors could not be enumerated by exercising the API because every route requires a Bearer token.

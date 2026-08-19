@@ -1,13 +1,24 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: warmly.ai
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep  4 20:47:03 2026 GMT
+  cert_expires: Nov  2 23:06:40 2026 GMT
   hsts: true
   hsts_max_age: 31536000
+- host: help.warmly.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 27 03:16:14 2026 GMT
+  hsts: true
+  hsts_max_age: 15552000
+- host: opps-api.getwarmly.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  5 21:25:12 2026 GMT
+  hsts: null
 domains:
 - domain: warmly.ai
   dnssec: true
@@ -15,3 +26,9 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+- domain: getwarmly.com
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

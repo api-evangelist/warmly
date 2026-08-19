@@ -1,0 +1,94 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* across every Warmly host in apis.yml
+summary: >-
+  Warmly serves exactly one first-party /.well-known document: RFC 9728 OAuth
+  Protected Resource Metadata at the API host, which is what makes the hosted MCP
+  server discoverable to an OAuth-capable agent. It names an external WorkOS
+  AuthKit tenant as the authorization server; that tenant's RFC 8414 / OIDC
+  discovery documents are captured here as the delegated auth surface. No
+  security.txt, api-catalog, ai-plugin.json or agent card is served on any host.
+hosts_probed:
+- https://opps-api.getwarmly.com
+- https://warmly.ai
+- https://www.warmly.ai
+- https://help.warmly.ai
+- https://opps.getwarmly.com
+- https://getwarmly.com
+- https://www.getwarmly.com
+- https://status.getwarmly.com
+- https://vigorous-paper-03.authkit.app
+documents:
+- host: https://opps-api.getwarmly.com
+  path: /.well-known/oauth-protected-resource
+  spec: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  status: 200
+  content_type: application/json
+  file: warmly-oauth-protected-resource.json
+  note: >-
+    Declares resource https://opps-api.getwarmly.com/api/mcp, bearer_methods_supported
+    [header], scopes_supported [] (empty), and resource_documentation
+    https://docs.getwarmly.com/mcp — a documentation host that does not resolve in DNS.
+- host: https://vigorous-paper-03.authkit.app
+  path: /.well-known/oauth-authorization-server
+  spec: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  status: 200
+  content_type: application/json
+  file: warmly-oauth-authorization-server.json
+  first_party: false
+  note: >-
+    Third-party host, but this is the authorization server Warmly's own
+    RFC 9728 metadata points at — a WorkOS AuthKit tenant. Captured because it is
+    the only place the MCP server's OAuth endpoints, grant types and scopes are published.
+- host: https://vigorous-paper-03.authkit.app
+  path: /.well-known/openid-configuration
+  spec: OpenID Connect Discovery 1.0
+  status: 200
+  content_type: application/json
+  file: warmly-openid-configuration.json
+  first_party: false
+  note: Same delegated AuthKit tenant; adds userinfo_endpoint and client_credentials grant.
+misses:
+- host: https://opps-api.getwarmly.com
+  paths:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://warmly.ai
+  paths:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://help.warmly.ai
+  paths:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+false_positives:
+- hosts: [https://opps.getwarmly.com, https://getwarmly.com, https://www.getwarmly.com]
+  observed_status: 200
+  verdict: not-a-document
+  detail: >-
+    Every /.well-known/* path on these hosts returns HTTP 200 with the Webflow
+    marketing page or the app single-page-app shell (Content-Type text/html,
+    identical byte length across all paths). These are catch-all responses, not
+    served documents, and are recorded as misses.
+- host: https://status.getwarmly.com
+  path: /.well-known/security.txt
+  observed_status: 200
+  verdict: not-warmly
+  detail: >-
+    A real RFC 9116 security.txt is served here, but it belongs to Rootly — the
+    status-page vendor (Contact mailto:security@rootly.com, Policy
+    https://rootly.com/legal/vulnerability-disclosure-policy). It is the vendor's
+    document on a CNAMEd subdomain, not Warmly's, and is deliberately NOT credited
+    to Warmly or saved as warmly-security.txt.
+security_txt:
+  served: false
+  note: Warmly serves no first-party security.txt on any host. Its disclosure route is the SafeBase trust center — see security/warmly-vulnerability-disclosure.yml.

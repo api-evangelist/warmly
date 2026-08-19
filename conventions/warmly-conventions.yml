@@ -1,45 +1,107 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api
 docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+summary: >-
+  Warmly does not present a resource-oriented REST API. It presents a tool
+  dispatcher: one POST endpoint takes a tool name and a free-form input object, always
+  answers HTTP 202, and hands back an execution record you poll. Every cross-cutting
+  convention below follows from that shape, and the two that matter most for an agent
+  — idempotency and rate-limit signalling — are absent.
 authentication:
-  rest: 'Bearer API key per organization (Authorization: Bearer)'
-  mcp: OAuth (browser login) per organization
+  rest: 'Bearer API key per organization (Authorization: Bearer $WARMLY_API_KEY), issued from the Warmly admin UI.'
+  mcp: OAuth 2.0 authorization code with PKCE against a WorkOS AuthKit tenant; browser login on first call.
+  discovery: https://opps-api.getwarmly.com/.well-known/oauth-protected-resource
+  scopes: none (scopes_supported is an empty array)
   reference: authentication/warmly-authentication.yml
 base_url: https://opps-api.getwarmly.com/api
+mcp_url: https://opps-api.getwarmly.com/api/mcp
 organization_scoping:
-  description: Every call is scoped to a single organization.
+  description: Every call is scoped to exactly one organization; multi-org users must pin one per connection.
   mechanisms:
-    - organizationId body field
-    - X-Warmly-Organization-Id header
-    - organization_id query parameter
+  - organizationId body field (REST)
+  - X-Warmly-Organization-Id header
+  - organization_id query parameter (appended to the MCP URL)
 execution_model:
+  style: single-endpoint tool dispatcher
   description: >-
-    Tools are invoked through a single execute endpoint that returns an
-    execution record; results and status are retrieved by execution id.
-  invoke: POST /agent-tools/execute
-  poll: GET /agent-tools/executions/:id
-  list: GET /agent-tools/executions
-  discover: GET /agent-tools/tools
-  async_writes: >-
-    Write tools (push contacts to HubSpot/Salesforce/sequences) run
-    asynchronously; execution status is reported via webhooks.
+    Capabilities are not paths. A caller POSTs {toolName, organizationId, input} and
+    receives an execution record. Synchronous tools return their result inline on that
+    record; asynchronous tools must be polled until a terminal status.
+  discover: 'GET /agent-tools/tools?organizationId=<id>'
+  invoke: 'POST /agent-tools/execute'
+  poll: 'GET /agent-tools/executions/:id'
+  list: 'GET /agent-tools/executions'
+  always_202: true
+  always_202_note: >-
+    POST /agent-tools/execute returns HTTP 202 on every outcome. Success is
+    output.success; failure is userFacingError. HTTP status is NOT the result signal.
+  states: [pending, running, awaiting_approval, succeeded, failed, cancelled]
+  human_in_the_loop:
+    supported: true
+    state: awaiting_approval
+    note: >-
+      An execution can park awaiting human approval. Warmly does not publish which
+      tools trigger it or how approval is granted through the API.
+input_contract:
+  schema_source: 'GET /agent-tools/tools returns {name, description, isAsync, inputSchema} with JSON Schema per tool.'
+  gated: true
+  limits:
+    serialized_max: 256KB
+    max_keys: 1000
+    max_depth: 32
+    reasoning_max_chars: 50000
+  reasoning_field:
+    name: reasoning
+    purpose: Free-text explanation of why the agent is calling the tool, stored on the execution record.
+    note: An unusual and agent-native field — it makes an agent's justification part of the audit trail.
 pagination:
-  style: parameterized
-  observed_params: [take, timeWindow]
-  note: Read tools accept input parameters such as take (page size) and timeWindow.
+  style: offset
+  params: [take, offset]
+  take_range: 1-500
+  additional_filters: [timeWindow, searchTerm, countries, industries, employeeSizeBands, pagesVisitedContains, requireBusinessContact]
+  response_fields: undocumented
+  note: >-
+    take/offset are documented on the read tools. Warmly does not publish a total
+    count field or a next-page cursor, so a client cannot tell when it has reached
+    the end other than by receiving fewer rows than requested.
 idempotency:
   supported: false
-  note: No idempotency-key header or contract is documented by the provider.
+  header: null
+  note: >-
+    No idempotency key, no Idempotency-Key header, no documented replay semantics.
+    `externalRef` on POST /agent-tools/execute is described only as "for reference
+    tracking" and is NOT documented as a deduplication key — retrying a write tool
+    with the same externalRef is not stated to be safe. Since write tools push
+    records into a customer's HubSpot or Salesforce, the absence of a replay
+    contract is a real risk for an agent that retries on timeout.
+dry_run:
+  supported: true
+  mechanism: 'preview: true'
+  applies_to: [list_third_party_signals]
+  effect: Returns totals without charging credits.
+  note: A genuine dry-run affordance, though scoped to signal lookups rather than offered API-wide.
+request_tracing:
+  request_id_header: none published
+  correlation: externalRef (caller-supplied) and the execution id
+  note: No server-generated request-id header is documented.
+versioning:
+  scheme: none
+  note: The base URL carries no version segment and no version header is documented.
+  reference: lifecycle/warmly-lifecycle.yml
+error_envelope:
+  transport: '{message, error, statusCode}'
+  tool_level: '{status, output.success, userFacingError} on a 202'
+  problem_json: false
+  reference: errors/warmly-problem-types.yml
+rate_limiting:
+  request_limit: 60/min free, 120/min paid
+  exhaustion: HTTP 429
+  headers_published: false
+  quota_model: credits (1 per new company, 1 per new contact, max 2 per unique visitor per month)
+  balance_check: 'get_credits_remaining tool — the only way to read remaining budget, since no header carries it'
+  reference: rate-limits/warmly-rate-limits.yml
 webhooks:
   supported: true
-  events: execution status; intent-signal delivery
+  events: agent-tool execution status; intent-signal delivery
   reference: asyncapi/warmly-webhooks.yml
-error_handling:
-  note: Errors are returned on the execution record; no RFC 9457 problem+json contract documented.
-rate_limiting:
-  model: credit-based
-  note: >-
-    Usage is metered in credits (250/month free; paid tiers 500-2,500). Credits
-    charge on identification (1 per company, 1 per contact, max 2 per unique
-    visitor per month) rather than by request rate.

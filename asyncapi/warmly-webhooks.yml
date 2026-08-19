@@ -1,17 +1,84 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 type: Webhooks
 source: https://help.warmly.ai/articles/7839413626-setting-up-webhooks
 docs: https://help.warmly.ai/articles/7839413626-setting-up-webhooks
-summary: Warmly delivers outbound webhooks for intent signals and agent-tool execution status, powering downstream automations (Google Sheets, Microsoft Teams via Power Automate, Zapier, Make) and reporting status of async agent-tool executions from the REST API and MCP server.
-event_surface:
-  - name: intent-signal
-    description: Identified visitor / company intent signals pushed to a subscriber URL.
-    docs: https://help.warmly.ai/articles/1250540603-send-warmly-intent-signals-to-google-sheets-via-webhook
-  - name: execution-status
-    description: Status updates for asynchronous agent-tool executions (e.g. CRM write tools).
-    docs: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+asyncapi_published: false
+asyncapi_note: >-
+  Warmly publishes no AsyncAPI document. This file captures the documented webhook
+  surface from the provider's own help centre and is deliberately NOT written as an
+  AsyncAPI spec, because none exists to harvest.
+summary: >-
+  Warmly's event surface is outbound-only and signal-driven. Seven intent signals can
+  each be routed to an HTTPS endpoint, either as a single unfiltered destination on
+  the free tier or as filtered "Send Company to Webhook" / "Send Contact to Webhook"
+  steps inside Orchestrator workflows on paid tiers. Payloads are rich — full contact,
+  company and signal blocks — but the delivery contract is thin: Warmly documents no
+  HTTP method, no signing scheme, no delivery headers and no retry policy, so a
+  receiver cannot verify that a payload actually came from Warmly.
+configuration:
+  free_tier:
+    path: Settings > Webhooks
+    destinations: 1
+    filtering: none (all unfiltered website visitors)
+  paid_tier:
+    path: Orchestrator workflows
+    destinations: unlimited
+    filtering: by audience and intent signal type
+    steps: [Send Company to Webhook, Send Contact to Webhook]
+  transport: HTTPS URL supplied by the subscriber
+events:
+- name: website-visit-contact
+  description: An identified contact visited your site.
+  payload_blocks: [contact, company, signal]
+- name: website-visit-company
+  description: An identified company visited your site.
+  payload_blocks: [company, signal]
+- name: bombora-research-intent
+  description: An ICP company is researching competitor or market keywords.
+  payload_blocks: [company, research-topics]
+  note: Carries research topics with confidence scores in place of the standard signal block.
+- name: social-engager
+  description: A contact engaged with your orchestrated social content.
+  payload_blocks: [contact, company, signal]
+- name: job-change
+  description: A customer champion moved to another target company.
+  payload_blocks: [contact, company]
+- name: new-hire
+  description: A typical buyer profile was hired at an ICP company.
+  payload_blocks: [contact, company]
+- name: job-opening
+  description: A company is hiring for a specific role.
+  payload_blocks: [company]
+- name: execution-status
+  description: Status updates for asynchronous agent-tool executions (e.g. CRM write tools).
+  docs: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
+  payload_blocks: [execution]
+  note: Referenced in the API launch material; no payload schema is published.
+payload:
+  guaranteed_fields:
+    contact: [email]
+    company: [domain]
+  contact_fields: [linkedInUrl, businessEmail, name, title, location, companyDetails, logo]
+  company_fields: [domain, legalName, industry, sector, employeeCount, revenueEstimate, techStack, socialHandles, location, foundingYear]
+  signal_fields: [seenAt, referrer, capturedUrl, sessionId, confidenceScore, ipLocation, utmParameters, pagesViewed, timeSpent, formFills, chatLogs]
+  null_handling: Enriched fields that are unavailable return null or an empty string.
+delivery_contract:
+  http_method: not published
+  headers: not published
+  signing: not published
+  authentication: not published
+  retries: not published
+  ordering: not published
+  gap: >-
+    None of the delivery semantics are documented. There is no signature header, no
+    shared secret and no replay-protection mechanism described, which means a
+    subscriber has no published way to authenticate an inbound Warmly payload.
 middleware:
-  - zapier: https://help.warmly.ai/articles/6752668157-warmly-zapier-integration
-  - make: https://help.warmly.ai/articles/6113850353-warmly-make-integration
-note: Warmly publishes no AsyncAPI document; this file captures the documented webhook surface. Not fabricated as an AsyncAPI spec.
+- {name: Zapier, docs: 'https://help.warmly.ai/articles/6752668157-warmly-zapier-integration'}
+- {name: Make, docs: 'https://help.warmly.ai/articles/6113850353-warmly-make-integration'}
+- {name: Google Sheets, docs: 'https://help.warmly.ai/articles/1250540603-send-warmly-intent-signals-to-google-sheets-via-webhook'}
+- {name: Microsoft Teams via Power Automate, docs: 'https://help.warmly.ai/articles/1481974657-microsoft-teams-integration-real-time-visitor-notifications'}
+inbound_events:
+  supported: false
+  note: Warmly exposes no inbound event ingestion, streaming, SSE or message-queue surface. The event surface is outbound webhooks only.

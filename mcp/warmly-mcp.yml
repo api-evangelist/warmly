@@ -1,36 +1,131 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 status: published
 source: https://www.warmly.ai/launches/warmly-mcp-and-api-are-live
 docs: https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server
+deployment:
+  mode: remote
+  endpoint: https://opps-api.getwarmly.com/api/mcp
+  install: claude mcp add --transport http warmly https://opps-api.getwarmly.com/api/mcp
+  package: null
+  auth: oauth
+  verified: probed
+  checked: '2026-08-13'
+  note: >-
+    Remote-only. There is no stdio package to install — the `claude mcp add` line
+    registers the hosted HTTPS endpoint, it does not download anything. An agent can
+    reach this surface directly once it holds a token.
 server:
   name: warmly
   transport: http
   url: https://opps-api.getwarmly.com/api/mcp
   authentication:
     type: oauth2
-    note: Browser-based OAuth login on first call; per-organization authorization.
+    discovery: https://opps-api.getwarmly.com/.well-known/oauth-protected-resource
+    authorization_server: https://vigorous-paper-03.authkit.app
+    platform: WorkOS AuthKit
+    scopes_supported: []
+    note: >-
+      Browser-based OAuth login on first call, per Warmly organization. The server
+      returns a correct RFC 9728 challenge — WWW-Authenticate carries
+      resource_metadata — so a compliant client discovers the authorization server
+      without configuration. See scopes/warmly-scopes.yml.
   multi_org:
     query_param: organization_id
     header: X-Warmly-Organization-Id
+    note: Multi-organization users must pin one organization per connection.
+probe:
+  url: https://opps-api.getwarmly.com/api/mcp
+  method: 'POST tools/list (jsonrpc 2.0)'
+  http_status: 401
+  result: gated
+  www_authenticate: 'Bearer resource_metadata="https://opps-api.getwarmly.com/.well-known/oauth-protected-resource", error="invalid_token"'
+  checked: '2026-08-13'
+  note: >-
+    The live tool list requires an authenticated session, so machine-readable
+    inputSchemas could not be retrieved. The tools below and their parameters are
+    transcribed from Warmly's published documentation, not from tools/list. Anyone
+    holding a token can recover the authoritative schemas from
+    GET /agent-tools/tools, which returns {name, description, isAsync, inputSchema}.
 install:
-  claude_desktop: Add a custom connector named "Warmly" pointing at the MCP URL.
+  claude_desktop: Customize -> Connectors -> add a custom connector named "Warmly" pointing at the MCP URL, then complete OAuth login.
   cli: claude mcp add --transport http warmly https://opps-api.getwarmly.com/api/mcp
+  clients_named: [Claude Desktop, Claude Code, Cursor, Zed]
 tools:
-  - name: list_warm_visitors
-    description: Identified site visitors with company/contact profiles, pages visited, UTM data, and CRM integration status.
-    read_only: true
-  - name: list_warm_accounts
-    description: Identified visitors aggregated by company with session counts.
-    read_only: true
-  - name: list_third_party_signals
-    description: Third-party intent signal lookups (hiring, news, funding, social).
-    read_only: true
-  - name: get_credits_remaining
-    description: Current monthly credit balance for the organization.
-    read_only: true
+- name: list_warm_visitors
+  description: >-
+    Identified website visitors with company profiles, contact details, session data,
+    CRM intersection status and UTM parameters.
+  read_only: true
+  async: false
+  charges_credits: true
+  parameters:
+  - {name: timeWindow, type: string}
+  - {name: take, type: integer, range: 1-500}
+  - {name: offset, type: integer}
+  - {name: requireBusinessContact, type: boolean}
+  - {name: searchTerm, type: string}
+  - {name: countries, type: array}
+  - {name: industries, type: array}
+  - {name: employeeSizeBands, type: array}
+  - {name: pagesVisitedContains, type: array}
+  returns:
+    session: [lastSeen, totalSessions, sessionTime]
+    company: [name, domain, industry, employeeRange, revenue]
+    contact: [name, title, seniority, linkedInHandle, workEmail]
+    crm: [HubSpot, Salesforce, Pipedrive intersection status]
+- name: list_warm_accounts
+  description: The same identified-visitor data grouped by company, with aggregated session counts and distinct page metrics.
+  read_only: true
+  async: false
+  charges_credits: true
+  parameters:
+  - {name: timeWindow, type: string}
+  - {name: take, type: integer, range: 1-500}
+  - {name: offset, type: integer}
+  note: Shares the list_warm_visitors filter set; grouping is by company.
+- name: list_third_party_signals
+  description: >-
+    Third-party intent signals — financial events, hiring trends, leadership changes,
+    news, G2 reviews, SEC filings, LinkedIn engagement.
+  read_only: true
+  async: false
+  charges_credits: true
+  modes:
+  - {mode: by_signal, description: Discover companies exhibiting a given signal.}
+  - {mode: by_company, description: Enrich a known account with its signals.}
+  parameters:
+  - {name: signalCategory, type: string}
+  - {name: signalType, type: string}
+  - {name: signalSubtype, type: string}
+  - {name: companyDomain, type: string}
+  - {name: detectedSince, type: string}
+  - {name: preview, type: boolean, note: 'Dry run — returns totals without charging credits.'}
+- name: get_credits_remaining
+  description: Current monthly credit balance for the organization.
+  read_only: true
+  async: false
+  charges_credits: false
+write_tools:
+  documented: partial
+  note: >-
+    Warmly documents that asynchronous write tools exist — pushing identified contacts
+    into HubSpot, Salesforce and sequences — and that they report completion by
+    webhook, but it does not publish their tool names or input schemas. They are
+    therefore NOT enumerated here. The execution model exposes an `awaiting_approval`
+    state, implying a human-in-the-loop gate on at least some writes.
+  reference: asyncapi/warmly-webhooks.yml
+rate_limits:
+  free: 60 requests/minute
+  paid: 120 requests/minute
+  exhaustion: HTTP 429
+  reference: rate-limits/warmly-rate-limits.yml
+credits:
+  charging: 1 per newly identified company, 1 per newly identified contact, max 2 per unique visitor per month
+  free_tier: 250 credits/month
+  dry_run: 'preview: true returns totals without charging credits'
+  reference: plans/warmly-plans-pricing.yml
 notes: >-
-  Async write tools push contacts to HubSpot, Salesforce, or sequences; webhooks
-  report execution status. Credits are charged on identification (1 per company,
-  1 per contact, max 2 per unique visitor per month). Free tier includes 250
-  credits/month.
+  Warmly's MCP server is the most complete surface it ships. It is remote, OAuth-
+  discoverable, and covers the same read capabilities as the REST API, with no
+  OpenAPI, no SDK and no CLI alongside it.

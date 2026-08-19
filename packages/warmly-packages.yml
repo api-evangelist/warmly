@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: searched
+source: registry queries against npm, PyPI, RubyGems, crates.io, GitHub, plus the Warmly docs
+official_sdk_count: 0
+summary: >-
+  Warmly ships NO first-party client SDK in any language registry. Every public
+  registry was queried and none returns a Warmly-published package. The only
+  first-party distributed artifacts are an unpinned CDN-hosted browser widget and a
+  Salesforce managed package installed from AppExchange — neither of which is an API
+  client library. A developer or agent integrating the REST API or the MCP server
+  writes raw HTTP.
+packages:
+- language: javascript
+  registry: cdn
+  name: warmly.js
+  url: https://opps-widget.getwarmly.com/warmly.js
+  install: '<script id="warmly-script-loader" src="https://opps-widget.getwarmly.com/warmly.js?clientId=YOUR_CLIENT_ID" defer></script>'
+  official: true
+  kind: browser-widget
+  version: null
+  published: null
+  note: >-
+    Distribution is UNPINNED — the URL carries no version segment and no integrity
+    hash, and the CDN sends Cache-Control no-cache/no-store/must-revalidate, so every
+    page load fetches whatever is current. There is no registry metadata endpoint to
+    query. The only currency signal available is the HTTP Last-Modified header, which
+    read 2026-08-12 at 12,468 bytes when probed. A consumer cannot tell which build
+    they are running, and neither can we.
+  last_modified: '2026-08-12'
+  size_bytes: 12468
+  content_type: text/javascript
+  http_status: 200
+  csp_domain: opps-widget.getwarmly.com
+  reference: components/warmly-components.yml
+- language: apex
+  registry: salesforce-appexchange
+  name: Warmly Managed Package
+  url: https://help.warmly.ai/articles/5697119005-warmly-managed-package-installation-report-update-guide
+  install: Installed into a Salesforce org from the AppExchange listing link in the Warmly docs.
+  official: true
+  kind: crm-managed-package
+  version: null
+  published: null
+  note: >-
+    A Salesforce managed package, not an API client library. AppExchange publishes no
+    unauthenticated metadata endpoint, so the version and release date cannot be read;
+    recorded as null rather than guessed.
+registries_checked:
+- {registry: npm, query: 'warmly / getwarmly', result: none-official, note: 'The npm package `warmly` (1.0.2, published 2026-02-18) is described by its own metadata as "Placeholder package", has no repository or homepage, and is owned by an unrelated maintainer. NOT Warmly and deliberately not listed above.'}
+- {registry: pypi, query: warmly, result: absent, http_status: 404}
+- {registry: rubygems, query: warmly, result: absent, http_status: 404}
+- {registry: crates.io, query: warmly, result: not-readable, http_status: 403, note: crates.io rejected the unauthenticated request; no Rust client is referenced anywhere in the Warmly docs.}
+- {registry: github, query: 'warmly.ai / getwarmly org', result: none, note: 'No GitHub organization exists at github.com/warmly-ai or github.com/getwarmly (both 404). No first-party repository was found.'}
+- {registry: maven-central, query: warmly, result: not-applicable, note: No JVM client is referenced in the docs.}
+- {registry: nuget, query: warmly, result: not-applicable, note: No .NET client is referenced in the docs.}
+- {registry: pkg.go.dev, query: warmly, result: not-applicable, note: No Go client is referenced in the docs.}
+gap: >-
+  With no SDK, no CLI, no OpenAPI and no Postman collection, the only generated
+  client surface Warmly offers is the MCP server itself — which is why an agent can
+  use Warmly more easily than a developer can.

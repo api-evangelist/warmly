@@ -1,0 +1,65 @@
+generated: '2026-08-13'
+method: searched
+source: https://status.getwarmly.com/
+docs: https://help.warmly.ai/en/collections/5275235549-mcp_api
+summary: >-
+  Warmly runs a real, component-level public status page and a dated public launch
+  feed, but publishes no API versioning scheme, no deprecation policy and no SLA.
+  The REST surface carries no version segment — the base URL is
+  https://opps-api.getwarmly.com/api with no /v1 — so consumers have no announced
+  contract for how a breaking change would be signalled.
+versioning:
+  scheme: none
+  current: null
+  in_path: false
+  base_url: https://opps-api.getwarmly.com/api
+  docs: null
+  note: >-
+    No version identifier appears in the base URL, in a header, or in any published
+    document. The MCP server is likewise unversioned at /api/mcp.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  rfc8594: unknown
+  note: >-
+    No deprecation or sunset policy is published, and the Deprecation/Sunset headers
+    could not be observed because every endpoint requires a Bearer token.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: No SLA or uptime commitment is published for the API or MCP server.
+status_page:
+  url: https://status.getwarmly.com/
+  platform: Rootly
+  http_status: 200
+  components:
+  - Admin & Access Control
+  - Chat & Realtime Engagement
+  - CRM & Data Integrations
+  - Notifications & External Channels
+  - Orchestrations
+  - Segments & Dashboards
+  - Sessions & Identity
+  uptime_window: 30 days
+  observed: All components operational, 100.00% 30-day uptime at time of check.
+  note: >-
+    The seven monitored components are platform-level. Neither the REST API
+    (opps-api.getwarmly.com) nor the MCP server is broken out as its own component,
+    so an agent cannot check the health of the surface it actually calls.
+  probe_note: >-
+    curl receives HTTP 403 with cf-mitigated=challenge (Cloudflare bot challenge);
+    the page renders and was read successfully with a browser-class fetch.
+support:
+  email: support@warmly.ai
+  scope: API issues (MCP and REST)
+  help_center: https://help.warmly.ai/
+deprecated_operations: []
+evidence:
+- url: https://status.getwarmly.com/
+  http_status: 200
+  detail: Rootly-powered status page, seven components, 30-day uptime history.
+- url: https://opps-api.getwarmly.com/
+  http_status: 404
+  detail: 'Fastify JSON 404 ({"message":"Route GET:/ not found"}) — no version banner or index is served at the API root.'

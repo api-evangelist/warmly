@@ -60,3 +60,35 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: warmly-zoom-partner-program
+  label: Zoom Partner Program
+  partner: zoom
+  partner_name: Zoom Partner Program
+  category: Zoom technology partner
+  type: register
+  channel: standard-directory
+  evidence: https://partner.zoom.com/solutions/warmly/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Zoom Partner Solutions (partner.zoom.com/solutions; /wp-json/wp/v2/isvsolution)
+    standard: Zoom Partner Program
+    spec_file: null
+    role: zoom-technology-partner
+    registered_name: Warmly
+    register_id: https://partner.zoom.com/solutions/warmly/
+    matched_domain: warmly.ai
+    matched_by: domain
+    identity_source: developer of the Zoom App Marketplace listing https://marketplace.zoom.us/apps/vkBX54brQ0-iiSGtEx33vg
+      linked from the partner page
+    signal_note: 'participation only: partner type / program tier is partner_tier, never counted; no Zoom certification
+      is printed on the register, so no certified_products'
+    detected_by: sweep-zoom-app-marketplace.py
+    detected: '2026-10-21'
+    context:
+      products:
+      - App Marketplace
+      - Meetings
+      - Webinar
+  status: not-a-workflow
+  arazzo: null

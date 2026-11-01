@@ -64,6 +64,131 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Warmly is a company surfaced as a portfolio company of felicis, techstars and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Warmly is a signal-based revenue orchestration and AI go-to-market platform that de-anonymizes website visitors down to the individual person, unifies first-, second-, and third-party intent signals in a unified Context Graph, and runs two autonomous agents — an Inbound Agent that converts on-site visitors through AI chat and an outbound TAM Agent that orchestrates prospecting across email, LinkedIn, and ads. Warmly exposes a REST API and a hosted, OAuth-authenticated MCP server (both live at opps-api.getwarmly.com) that let agents list warm visitors and accounts, look up third-party intent signals, check credit balances, and push identified contacts into HubSpot, Salesforce, and sequences — with outbound webhooks reporting agent-tool execution status and delivering intent signals to downstream automations.
 
-Backed by: felicis, techstars — https://warmly.ai
+**Areas:** Company · Sales · Marketing · Intent Data · Revenue Orchestration · Website Visitor Identification · AI Agents · Go-To-Market · MCP · Lead Generation · CRM
+
+## Warmly on APIs.io
+
+Everything profiled for Warmly is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/warmly/](https://apis.io/providers/warmly/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Warmly REST API](https://apis.io/apis/warmly/warmly-rest-api/) — REST API for Warmly's agent-tools surface — discover available tools, execute read tools (warm visitors, warm accounts, third-party intent signals, credit…
+- [Warmly MCP Server](https://apis.io/apis/warmly/warmly-mcp-server/) — Hosted, remote Model Context Protocol server exposing Warmly's agent-tools registry to MCP-capable agents (Claude Desktop, Claude Code, Cursor, Zed).…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Warmly Webhooks](https://apis.io/asyncapis/warmly/warmly-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [warmly](https://apis.io/servers/warmly/warmly/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Warmly Authentication](https://apis.io/security/warmly/warmly-authentication/)
+- [Warmly Domain Security](https://apis.io/security/warmly/warmly-domain-security/)
+- [Warmly Trust Center](https://apis.io/security/warmly/warmly-trust-center/)
+- [Warmly Vulnerability Disclosure](https://apis.io/security/warmly/warmly-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Warmly Scopes](https://apis.io/scopes/warmly/warmly-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Warmly Plans Pricing](https://apis.io/plans/warmly/warmly-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Warmly Rate Limits](https://apis.io/rate-limits/warmly/warmly-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://warmly.ai)
+- [Documentation](https://help.warmly.ai/)
+- [Getting started](https://help.warmly.ai/articles/4646691220-warmly-technical-documentation-mcp-server)
+- [API reference](https://help.warmly.ai/articles/9641856032-warmly-technical-documentation-rest-api)
+- [Pricing](https://www.warmly.ai/p/pricing)
+- [Sign up](https://opps.getwarmly.com/login/?signup=free)
+- [Support](https://help.warmly.ai/)
+- [Blog](https://www.warmly.ai/p/resources/blog)
+- [Security](https://security.warmly.ai/)
+- [Compliance](https://security.warmly.ai/)
+- [Terms of service](https://www.warmly.ai/p/terms-of-service)
+- [Privacy policy](https://www.warmly.ai/p/privacy-policy)
+- [Status](https://status.getwarmly.com/)
+
+## API Evangelist rating
+
+**Kin Score 58.8** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 71.1 |
+| Developer ergonomics | 49.4 |
+| Access clarity | 78.9 |
+
+**Agent readiness 50.9** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/warmly/](https://apis.io/providers/warmly/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Warmly: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/warmly/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
